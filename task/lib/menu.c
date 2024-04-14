@@ -18,3 +18,9 @@ void printServiceMenu()
 {
         printf("\n|----------( Control options )----------|\n\n0) Back.\n1) Start process.\n2) Stop process\n");
 }
+
+
+void printSignalMenu()
+{
+	printf("\n|----------( Signal Menu )----------|\n\n0) Back.\n1) Stop.\n2) Interput.\n3) Abort.\n4) Quit.\n5) Continue.\n6) Terminate.\n7) Kill.\n8) Hang Up.\n9) Trap.\n");
+}

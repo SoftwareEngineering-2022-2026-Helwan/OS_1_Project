@@ -23,7 +23,7 @@ const String GET_PROCESS_ID =" $( ps -o pid= -C $PROCESS_NAME )";
 
 const String SIG_STOP = " STOP ";
 const String SIG_INTURUPT = " INT ";
-const String SIG_ABROT = " ABRT ";
+const String SIG_ABORT = " ABRT ";
 const String SIG_QUIT = " QUIT ";
 const String SIG_CONTINUE = " CONT ";
 const String SIG_TERMINATE = " TERM ";

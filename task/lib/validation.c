@@ -22,7 +22,6 @@ int optionValidation( int min, int max)
 
 }
 
-
 void getGroupName(char** groupName)
 {
 	*groupName = (char *) malloc(1000);
@@ -39,7 +38,7 @@ void getServiceName(char** serviceName)
         scanf(" %[^\n]",*serviceName);
 }
 
-int startService()
+int startServiceNow()
 {
 	int option;
 	do
@@ -58,4 +57,32 @@ int startService()
 
 	}while(option != 0);
 	return -1;
+}
+
+
+String selectedSignal(int choice)
+{
+	switch(choice)
+	{
+		case 1: 
+			return SIG_STOP;
+		case 2:
+			return SIG_INTURUPT;
+		case 3: 
+			return SIG_ABORT;
+		case 4: 
+			return SIG_QUIT;
+		case 5: 
+			return SIG_CONTINUE;
+		case 6: 
+			return SIG_TERMINATE;
+		case 7: 
+			return SIG_KILL;
+		case 8:
+			return SIG_HANGUP;
+		case 9:
+			return SIG_TRAP;
+	}
+	
+	return "Invalid";
 }
