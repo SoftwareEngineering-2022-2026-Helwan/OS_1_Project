@@ -83,8 +83,7 @@ int main(int argc, String argv[])
 					sendSignal(selectedSignal(1), &command);
 
 					// run the env save and execute in the same time due to session per system call
-					strcat(getServiceID,command); 
-					strcpy( command, getServiceID);
+					prepareCommandWithProcessId(&command,getServiceID);
 
 					free(getServiceID);
 					free(serviceName);
@@ -106,9 +105,10 @@ int main(int argc, String argv[])
 				sendSignal(selectedSignal(choice), &command);
 
 				// run the env save and execute in the same time due to session per system call
-				strcat(getServiceID,command); 
-				strcpy( command, getServiceID);
+				prepareCommandWithProcessId(&command,getServiceID);
+
 				printf("\n[-->] Sending %s Signal to %s\n",selectedSignal(choice),serviceName);
+				
 				free(getServiceID);
 				free(serviceName);
 					

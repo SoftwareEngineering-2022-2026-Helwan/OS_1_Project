@@ -67,3 +67,10 @@ void IsProcessRun(String serviceName)
 
 	free(command);
 }
+
+void prepareCommandWithProcessId(String *command, String getProcessId)
+{
+	strcat(getProcessId,*command); 
+	strcpy( *command, getProcessId);
+
+}
