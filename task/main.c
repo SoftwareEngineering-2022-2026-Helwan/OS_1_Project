@@ -36,7 +36,7 @@ int main(int argc, String argv[])
 		}
 	}
 
-	int option;
+	int option, start;
 	String command = (String) malloc(500), groupName, serviceName, getServiceID;
 	do
 	{
@@ -46,38 +46,31 @@ int main(int argc, String argv[])
 		switch(option)
 		{
 			case 1:
-				strcpy(command,PS);
-				strcat(command,PS_ALL_OPTION);
-				printListHeader();
-				
+
+				displayAllProcess(&command);
+
 				break;
 			case 2:
+				
 				getGroupName(&groupName);
-				strcpy(command,PS);
-				strcat(command,PS_GROUP_OPTION);
-				strcat(command,groupName);
-				printListHeader();
+				displayAllProcessByGroup(&command,groupName);
+				
 				free(groupName);
 				break;
 			case 3:
-				strcpy( command, PS);
-				///print id of aux or -A
-				//strcat( command, PS_ALL_OPTION);
-				strcat( command, PS_IDS_OPTION);
-				printListHeader();          
+
+				displayAllProcessId(&command);          
 				
 				break;
 			case 4:
 				//[!] if service is started shall we start it again 
 				printServiceHeader();
 				getServiceName(&serviceName);
-				int start = startServiceNow();
+				start = startServiceNow();
 				if(start == 1)
 				{
-					printf("\n[~] Starting : %s\n",serviceName);
-					strcpy(command,serviceName);
-					strcat(command," & ");
-					free(serviceName);
+					startProcess(&command,serviceName);
+
 				}
 				else if( start == 0)
 				{	
@@ -103,6 +96,7 @@ int main(int argc, String argv[])
 			case 5:
 				printServiceHeader();
 				getServiceName(&serviceName); 
+
 				printSignalMenu();
 				int choice = optionValidation(0,9);
 
@@ -110,6 +104,7 @@ int main(int argc, String argv[])
 				getProcessId( &getServiceID,serviceName);
 				//stop the process	
 				sendSignal(selectedSignal(choice), &command);
+
 				// run the env save and execute in the same time due to session per system call
 				strcat(getServiceID,command); 
 				strcpy( command, getServiceID);
@@ -125,6 +120,13 @@ int main(int argc, String argv[])
 		if(option != 0)
 		{
 			system(command);
+
+			if(option == 4 && start == 1)
+			{
+				IsProcessRun(serviceName);
+
+				free(serviceName);
+			}
 		}
 		
 

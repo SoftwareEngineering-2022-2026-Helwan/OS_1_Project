@@ -18,6 +18,11 @@ const String KILL = "kill -s ";
 const String SET_PROCESS_NAME = "PROCESS_NAME=\"";
 const String CLOSE_QUOTE = "\"";
 const String GET_PROCESS_ID =" $( ps -o pid= -C $PROCESS_NAME )";
+const String START_BACKGROUND_PROCESS_PART1 = "( ";
+const String START_BACKGROUND_PROCESS_PART2 = " > /dev/null 2>&1 &) ";
+// validate process start 
+const String IS_PROCESS_UP_PART1 = "if [ \"$(ps -o pid= -C ";
+const String IS_PROCESS_UP_PART2 = " )\" = \"\" ]; then echo \"\n[^] Process Status: Not Running\n\" ;else echo \"\n[^] Process Status: Running\n\";fi";
 
 // |---------( Singals )---------|
 
