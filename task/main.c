@@ -12,19 +12,12 @@ int main(int argc, String argv[])
 	{
 		if ( !strcmp(argv[1],"-h") )
 		{
-			String program = (String) malloc(strlen(argv[0]));
 			String manual = (String) malloc(255);
-			strcpy(manual,"man ");
+			getAppName(&manual,argv[0]);
 			
-			int length = strlen(argv[0])-2;
-			strncpy(program,argv[0]+2,length);
-			program[length+1] = '\0';
-			
-			strcpy(manual,program);
+			//display manual 
 			system(manual);
-			
 			free(manual);
-			free(program);
 			return 1;
 		}
 		else
