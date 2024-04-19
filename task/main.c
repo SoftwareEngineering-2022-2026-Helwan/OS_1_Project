@@ -5,10 +5,11 @@
 #include "lib/command.h"
 #include "lib/validation.c" 
 #include "lib/processUtils.c" 
+#include "lib/debug.c"
 
 int main(int argc, String argv[])
 {
-	if( argc == 2)
+	if( argc >= 2)
 	{
 		if ( !strcmp(argv[1],"-h") )
 		{
@@ -19,6 +20,10 @@ int main(int argc, String argv[])
 			system(manual);
 			free(manual);
 			return 1;
+		}
+		else if  ( !strcmp(argv[1],"-d") )
+		{
+			debug( atoi(argv[2]) );
 		}
 		else
 		{

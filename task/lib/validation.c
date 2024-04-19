@@ -6,20 +6,16 @@ int optionValidation( int min, int max)
 	
 }
 
-void getGroupName(char** groupName)
+void getGroupName(String* groupName)
 {
 	
 }
 
-void getServiceName(char** serviceName)
+void getProcessName(String* serviceName)
 {
         
 }
 
-int startServiceNow()
-{
-	
-}
 
 
 String selectedSignal(int choice)

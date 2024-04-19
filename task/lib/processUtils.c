@@ -2,16 +2,11 @@
 #include<stdlib.h>
 #include<string.h>
 
-void getProcessId(String* getServiceID, String serviceName)
-{
-	
-					
-}
+// |--------( Waiting for Doctor to use simple way )--------|
 
-void sendSignal(String signal, String *command)
-{
-    
-}
+// void getProcessId(String* getServiceID, String serviceName);
+// void IsProcessRun(String serviceName);
+// void prepareCommandWithProcessId(String *command, String getProcessId);
 
 
 void displayAllProcess(String *command)
@@ -36,13 +31,7 @@ void startProcess(String *command, String serviceName)
 	
 }
 
-void IsProcessRun(String serviceName)
+void sendSignal(String signal, String *command)
 {
 	
-}
-
-void prepareCommandWithProcessId(String *command, String getProcessId)
-{
-	
-
 }
