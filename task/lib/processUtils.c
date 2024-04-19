@@ -40,10 +40,11 @@ void displayAllProcessByGroup(String *command, String groupName)
 
 void displayAllProcessId(String *command)
 {
-	strcpy( *command, PS);
-	///print id of aux or -A
-	//strcat( *command, PS_ALL_OPTION);
+	/*strcpy( *command, PS);
 	strcat( *command, PS_IDS_OPTION);
+	*/
+
+	sprintf(*command,"%s %s",PS,PS_IDS_OPTION);
 	printListHeader();
 }
 

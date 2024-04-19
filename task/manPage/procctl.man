@@ -1,0 +1,27 @@
+.TH processControleApp 2024-04-15 GNU
+
+.SH NAME
+
+\fBprocessControleApp\fR — process managment app 
+
+.SH SYNOPSIS
+
+\fBprocessControleApp\fR
+[\fB — h\fR]
+
+.SH DESCRIPTION
+.B processControleApp
+the app is use to list process and controle process by sending signal and run given process
+
+.SH OPTIONS
+.TP
+.BR -h 
+used to display help page (man page) 
+
+.SH SEE ALSO
+
+\fBps\fR(1) ,  \fBkill\fR(1)
+
+.SH AUTHOR 
+
+\fBAhmed Mohamed Omar <user@mail.com>\fR

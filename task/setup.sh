@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-AppName="processControleApp"
+AppName="procctl"
 
 # to compile the man page
 pandoc manPage/$AppName.1.md -s -t man -o manPage/$AppName.1 
