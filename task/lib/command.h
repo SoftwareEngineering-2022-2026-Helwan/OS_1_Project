@@ -9,10 +9,12 @@ typedef char* String;
 const String PS = "ps ";
 const String PS_GROUP_OPTION = " -G ";
 const String PS_ALL_OPTION = " aux ";
-const String PS_IDS_OPTION = " -A -o pid= ";
+const String PS_IDS_OPTION = " ax -o pid= ";
 
 
 // |---------( Process Control Command )---------|
+
+const String PKILL = "pkill -";
 
 const String KILL = "kill -s ";
 const String SET_PROCESS_NAME = "PROCESS_NAME=\"";

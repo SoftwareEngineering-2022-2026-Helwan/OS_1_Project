@@ -12,6 +12,12 @@ void task2()
     printf("\nsignal validation menu");
 }
 
+void test3()
+{
+    task1();
+    task2();
+}
+
 
 // |--------( Debug Methods )--------|
 
@@ -26,6 +32,9 @@ void debug(int task)
         case 2:
         
             task2();
+            break;
+        case 3: 
+            test3();
             break;
         
     }

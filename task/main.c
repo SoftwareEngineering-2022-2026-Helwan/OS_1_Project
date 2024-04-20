@@ -7,10 +7,11 @@
 #include "lib/processUtils.c" 
 #include "lib/debug.c"
 
-int main(int argc, String argv[])
+int main(int argc, String argv[] /* char **argv */)
 {
 	if( argc >= 2)
 	{
+		
 		if ( !strcmp(argv[1],"-h") )
 		{
 			String manual = (String) malloc(255);
