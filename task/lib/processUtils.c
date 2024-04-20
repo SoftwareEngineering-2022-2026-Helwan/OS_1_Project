@@ -31,6 +31,11 @@ void startProcess(String *command, String serviceName)
 	
 }
 
+void stopProcess(String *command, String processName)
+{
+    
+}
+
 void sendSignal(String signal, String *command)
 {
 	
