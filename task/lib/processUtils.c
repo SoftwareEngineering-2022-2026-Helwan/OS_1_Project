@@ -28,15 +28,25 @@ void displayAllProcessId(String *command)
 
 void startProcess(String *command, String serviceName)
 {
-	
+	strcpy(*command , serviceName);
+    strcat(*command , " &");
+    system(*command);
+    free(*command);
 }
 
 void stopProcess(String *command, String processName)
 {
-    
+    strcpy(*command ,PKILL);
+    strcat(*command ,SIG_STOP);
+    strcat(*command , processName); 
+    system(*command);
+    free(*command);
 }
 
 void sendSignal(String signal, String *command)
 {
-	
+	strcpy(*command ,PKILL);
+    strcat(*command ,signal); 
+    system(*command);
+    free(*command);
 }
