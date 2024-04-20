@@ -3,3 +3,4 @@ main
 out
 .idea
 *.iml
+*.class
