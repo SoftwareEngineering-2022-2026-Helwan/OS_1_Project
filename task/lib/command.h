@@ -28,15 +28,15 @@ const String IS_PROCESS_UP_PART2 = " )\" = \"\" ]; then echo \"\n[^] Process Sta
 
 // |---------( Singals )---------|
 
-const String SIG_STOP = " STOP ";
-const String SIG_INTURUPT = " INT ";
-const String SIG_ABORT = " ABRT ";
-const String SIG_QUIT = " QUIT ";
-const String SIG_CONTINUE = " CONT ";
-const String SIG_TERMINATE = " TERM ";
-const String SIG_KILL = " KILL ";
-const String SIG_HANGUP = " HUP ";
-const String SIG_TRAP = " TRAP ";
+const String SIG_STOP = "STOP ";
+const String SIG_INTURUPT = "INT ";
+const String SIG_ABORT = "ABRT ";
+const String SIG_QUIT = "QUIT ";
+const String SIG_CONTINUE = "CONT ";
+const String SIG_TERMINATE = "TERM ";
+const String SIG_KILL = "KILL ";
+const String SIG_HANGUP = "HUP ";
+const String SIG_TRAP = "TRAP ";
 
 
 

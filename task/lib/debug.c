@@ -4,18 +4,26 @@
 // |--------( Test Methods )--------|
 void task1()
 {
-    printf("\noption menu");
+    String command = (String)malloc(500);
+    String name ;
+    getProcessName(&name);
+    sendSignal(selectedSignal(7),&command, name);
 }
 
 void task2()
 {
-    printf("\nsignal validation menu");
+    String command = (String)malloc(500);
+    String name ;
+    getProcessName(&name);
+    stopProcess(&command,name);
 }
 
 void test3()
 {
-    task1();
-    task2();
+    String command = (String)malloc(500);
+    String name ;
+    getProcessName(&name);
+    startProcess(&command,name);
 }
 
 

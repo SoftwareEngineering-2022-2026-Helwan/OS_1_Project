@@ -43,10 +43,11 @@ void stopProcess(String *command, String processName)
     free(*command);
 }
 
-void sendSignal(String signal, String *command)
+void sendSignal(String signal, String *command, String processName)
 {
 	strcpy(*command ,PKILL);
-    strcat(*command ,signal); 
+    strcat(*command ,signal);
+    strcat(*command ,processName); 
     system(*command);
     free(*command);
 }
