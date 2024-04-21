@@ -19,6 +19,18 @@ void test3()
 }
 
 
+void test4()
+{
+    String name = (String)malloc(500);
+
+    strcpy(name,selectedSignal(10));
+
+    printf("\n name = %s", name);
+
+
+    // printf("\nyour choice: %d",optionValidation(0,6));
+}
+
 // |--------( Debug Methods )--------|
 
 void debug(int task)
@@ -36,7 +48,9 @@ void debug(int task)
         case 3: 
             test3();
             break;
-        
+        case 4:
+            test4();
+            break;
     }
 }
 

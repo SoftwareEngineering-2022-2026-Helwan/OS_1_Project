@@ -1,31 +1,32 @@
 #include<stdlib.h>
+#include "command.h"
 #include<string.h>
 #include<ctype.h>
+#include<stdio.h>
 
 int optionValidation( int min, int max)
 {
-	String choice;
+	String choice = (String)malloc(500);
 	int ch;
 	do{
 		printf("\nEnter your choice: ");
-		scanf("%s",&choice);
-		ch = atoi(choice);
-
-		if(isdigit(choice)){
-			
-			if(ch >= min && ch <= max){
-				return ch;
-			}
-			else{
-				printf("\nInvalid input.\n");
-			}
-
+		scanf("%s",choice);
+		
+		if(sscanf(choice,"%d",&ch)!=1)
+		{
+			ch=-1;
 		}
-		else{
+		// c atoi(choice);
+		
+		if((ch < min || ch > max)){
 			printf("\nInvalid input.\n");
 		}
+		
 
-	}while(ch >= min && ch <= max);
+		
+
+	}while(ch < min || ch > max);
+	return ch;
 }
 
 void getGroupName(String* groupName)
