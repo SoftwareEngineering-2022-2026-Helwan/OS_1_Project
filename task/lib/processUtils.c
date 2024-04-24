@@ -2,52 +2,76 @@
 #include<stdlib.h>
 #include<string.h>
 
-// |--------( Waiting for Doctor to use simple way )--------|
+void getProcessId(String* getServiceID, String serviceName)
+{
+	*getServiceID = (char *) malloc(1000);
+	strcpy( *getServiceID, SET_PROCESS_NAME);
+	strcat( *getServiceID, serviceName);
+	strcat( *getServiceID, CLOSE_QUOTE);
+	strcat( *getServiceID, " && ");
+					
+}
 
-// void getProcessId(String* getServiceID, String serviceName);
-// void IsProcessRun(String serviceName);
-// void prepareCommandWithProcessId(String *command, String getProcessId);
+void sendSignal(String signal, String *command)
+{
+    strcpy( *command, KILL);
+	strcat( *command, signal); 
+	strcat( *command, GET_PROCESS_ID);
+}
 
 
 void displayAllProcess(String *command)
 {
-	
+	strcpy(*command,PS);
+	strcat(*command,PS_ALL_OPTION);
+	printListHeader();
 }
 
 void displayAllProcessByGroup(String *command, String groupName)
 {
 	
-	
+	strcpy(*command,PS);
+	strcat(*command,PS_GROUP_OPTION);
+	strcat(*command,groupName);
+	printListHeader();
+
 }
 
 
 void displayAllProcessId(String *command)
 {
-	
+	/*strcpy( *command, PS);
+	strcat( *command, PS_IDS_OPTION);
+	*/
+
+	sprintf(*command,"%s %s",PS,PS_IDS_OPTION);
+	printListHeader();
 }
 
 void startProcess(String *command, String serviceName)
 {
-	strcpy(*command , serviceName);
-    strcat(*command , " &");
-    system(*command);
-    free(*command);
+	printf("\n[~] Starting : %s\n",serviceName);
+	strcpy(*command,START_BACKGROUND_PROCESS_PART1);
+	strcat(*command,serviceName);
+	strcat(*command,START_BACKGROUND_PROCESS_PART2);
 }
 
-void stopProcess(String *command, String processName)
+void IsProcessRun(String serviceName)
 {
-    strcpy(*command ,PKILL);
-    strcat(*command ,SIG_STOP);
-    strcat(*command , processName); 
-    system(*command);
-    free(*command);
+	String command = (String) malloc(500);
+
+	strcpy(command, IS_PROCESS_UP_PART1);
+	strcat(command,serviceName);
+	strcat(command,IS_PROCESS_UP_PART2);
+
+	system(command);
+
+	free(command);
 }
 
-void sendSignal(String signal, String *command, String processName)
+void prepareCommandWithProcessId(String *command, String getProcessId)
 {
-	strcpy(*command ,PKILL);
-    strcat(*command ,signal);
-    strcat(*command ,processName); 
-    system(*command);
-    free(*command);
+	strcat(getProcessId,*command); 
+	strcpy( *command, getProcessId);
+
 }

@@ -5,11 +5,10 @@
 #include "lib/command.h"
 #include "lib/validation.c" 
 #include "lib/processUtils.c" 
-#include "lib/debug.c"
 
 int main(int argc, String argv[])
 {
-	if( argc >= 2)
+	if( argc == 2)
 	{
 		if ( !strcmp(argv[1],"-h") )
 		{
@@ -20,11 +19,6 @@ int main(int argc, String argv[])
 			system(manual);
 			free(manual);
 			return 1;
-		}
-		if ( !strcmp(argv[1],"-d") )
-		{
-			debug(atoi(argv[2]));
-			return 2;
 		}
 		else
 		{
@@ -64,52 +58,52 @@ int main(int argc, String argv[])
 			case 4:
 				//[!] if service is started shall we start it again 
 				printServiceHeader();
-				// getServiceName(&serviceName);
-				// start = startServiceNow();
-				// if(start == 1)
-				// {
-				// 	// startProcess(&command,serviceName);
+				getServiceName(&serviceName);
+				start = startServiceNow();
+				if(start == 1)
+				{
+					startProcess(&command,serviceName);
 
-				// }
-				// else if( start == 0)
-				// {	
-				// 	printf("\n[~] Stoping : %s\n",serviceName);
+				}
+				else if( start == 0)
+				{	
+					printf("\n[~] Stoping : %s\n",serviceName);
 
-				// 	// Store service id in ENV variable 
-				// 	// getProcessId( &getServiceID,serviceName);
+					// Store service id in ENV variable 
+					getProcessId( &getServiceID,serviceName);
 
-				// 	//stop the process	
-				// 	// sendSignal(selectedSignal(1), &command);
+					//stop the process	
+					sendSignal(selectedSignal(1), &command);
 
-				// 	// // run the env save and execute in the same time due to session per system call
-				// 	// prepareCommandWithProcessId(&command,getServiceID);
+					// run the env save and execute in the same time due to session per system call
+					prepareCommandWithProcessId(&command,getServiceID);
 
-				// 	// free(getServiceID);
-				// 	// free(serviceName);
+					free(getServiceID);
+					free(serviceName);
 					
-				// }
+				}
 				
 
 				break;
 			case 5:
 				printServiceHeader();
-				// getServiceName(&serviceName); 
+				getServiceName(&serviceName); 
 
-				// printSignalMenu();
-				// int choice = optionValidation(0,9);
+				printSignalMenu();
+				int choice = optionValidation(0,9);
 
-				// // Store service id in ENV variable 
-				// getProcessId( &getServiceID,serviceName);
-				// //stop the process	
-				// sendSignal(selectedSignal(choice), &command);
+				// Store service id in ENV variable 
+				getProcessId( &getServiceID,serviceName);
+				//stop the process	
+				sendSignal(selectedSignal(choice), &command);
 
-				// // run the env save and execute in the same time due to session per system call
-				// prepareCommandWithProcessId(&command,getServiceID);
+				// run the env save and execute in the same time due to session per system call
+				prepareCommandWithProcessId(&command,getServiceID);
 
-				// printf("\n[-->] Sending %s Signal to %s\n",selectedSignal(choice),serviceName);
+				printf("\n[-->] Sending %s Signal to %s\n",selectedSignal(choice),serviceName);
 				
-				// free(getServiceID);
-				// free(serviceName);
+				free(getServiceID);
+				free(serviceName);
 					
 
 				break;
@@ -120,12 +114,12 @@ int main(int argc, String argv[])
 		{
 			system(command);
 
-			// if(option == 4 && start == 1)
-			// {
-			// 	IsProcessRun(serviceName);
+			if(option == 4 && start == 1)
+			{
+				IsProcessRun(serviceName);
 
-			// 	free(serviceName);
-			// }
+				free(serviceName);
+			}
 		}
 		
 
