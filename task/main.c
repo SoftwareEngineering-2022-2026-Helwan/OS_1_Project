@@ -58,7 +58,7 @@ int main(int argc, String argv[])
 			case 4:
 				//[!] if service is started shall we start it again 
 				printServiceHeader();
-				getServiceName(&serviceName);
+				getProcessName(&serviceName);
 				start = startServiceNow();
 				if(start == 1)
 				{
@@ -73,7 +73,7 @@ int main(int argc, String argv[])
 					getProcessId( &getServiceID,serviceName);
 
 					//stop the process	
-					sendSignal(selectedSignal(1), &command);
+					sendSignal(selectedSignal(7), &command);
 
 					// run the env save and execute in the same time due to session per system call
 					prepareCommandWithProcessId(&command,getServiceID);
@@ -87,7 +87,7 @@ int main(int argc, String argv[])
 				break;
 			case 5:
 				printServiceHeader();
-				getServiceName(&serviceName); 
+				getProcessName(&serviceName); 
 
 				printSignalMenu();
 				int choice = optionValidation(0,9);

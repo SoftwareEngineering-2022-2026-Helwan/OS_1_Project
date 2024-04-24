@@ -71,6 +71,28 @@ String selectedSignal(int choice)
 	}
 }
 
+int startServiceNow()
+{
+	int option;
+	do
+	{
+		printServiceMenu();
+		option = optionValidation(0,2);
+
+		if(option == 1) 
+		{
+			return 1;
+		}
+		else if(option == 2) 
+		{
+			return 0;
+		}
+
+	}while(option != 0);
+	return -1;
+}
+
+
 void getAppName(String *manual, String arg0)
 {
 	String program = (String) malloc(strlen(arg0));
