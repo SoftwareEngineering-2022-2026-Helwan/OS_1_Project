@@ -6,11 +6,12 @@
 
 int optionValidation( int min, int max)
 {
-	String choice = (String)malloc(500);
+	String choice = (String)malloc(100);
 	int ch;
 	do{
 		printf("\nEnter your choice: ");
 		scanf("%s",choice);
+
 		
 		if(sscanf(choice,"%d",&ch)!=1)
 		{
@@ -31,16 +32,17 @@ int optionValidation( int min, int max)
 
 void getUserName(String* groupName)
 {
-	*groupName = (String)malloc(500);
-	printf("\nEnter Group Name: ");
+	*groupName = (String)malloc(1000);
+	printf("\nEnter User Name: ");
 	scanf("%s",*groupName);
 }
 
 void getProcessName(String* serviceName)
 {
-    *serviceName = (String)malloc(500);
+    *serviceName = (String)malloc(1000);
+	getchar();
 	printf("\nEnter Process Name: ");
-	scanf("%s",*serviceName);   
+	scanf("%999[^\n]",*serviceName);   
 }
 
 

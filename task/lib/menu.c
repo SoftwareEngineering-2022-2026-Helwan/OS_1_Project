@@ -11,7 +11,7 @@ void printListHeader()
 }
 void printMainMenu()
 {
-	printf("\n|----------( Main Menu )----------|\n\n0) Exit\n1) List all processes.\n2) List processes of Specific group.\n3) List Processes Ids.\n4) Start or Stop Specific Process.\n5) Send Signal To Specific Process.\n");
+	printf("\n|----------( Main Menu )----------|\n\n0) Exit\n1) List all processes.\n2) List processes of Specific user.\n3) List Processes Ids.\n4) Start or Stop Specific Process.\n5) Send Signal To Specific Process.\n");
 }
 
 void printServiceMenu()

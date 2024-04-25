@@ -30,7 +30,7 @@ int main(int argc, String argv[])
 	}
 
 	int option, start;
-	String command = (String) malloc(500), userName, processName;
+	String command = (String) malloc(5000), userName, processName;
 	do
 	{
 		printMainMenu();

@@ -41,14 +41,13 @@ void stopProcess(String *command, String processName)
     strcpy(*command ,PKILL);
     strcat(*command ,SIG_KILL);
     strcat(*command , processName);
+
 }
 
 void sendSignal(String signal, String *command, String processName)
 {
-	strcpy(*command ,PKILL);
-    strcat(*command ,signal); 
-    strcat(*command ,processName); 
-    
+	sprintf(*command, "%s%s \"%s\"",PKILL,signal,processName); 
+	
 }
 
 

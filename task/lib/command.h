@@ -14,7 +14,7 @@ const String PS_IDS_OPTION = " ax -o pid ";
 
 // |---------( Process Control Command )---------|
 
-const String PKILL = "pkill -";
+const String PKILL = "pkill -f -";
 
 const String KILL = "kill -s ";
 const String SET_PROCESS_NAME = "PROCESS_NAME=\"";
