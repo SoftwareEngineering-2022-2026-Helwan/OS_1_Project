@@ -7,9 +7,9 @@ typedef char* String;
 // |---------( Process Display Command )---------|
 
 const String PS = "ps ";
-const String PS_GROUP_OPTION = " -G ";
+const String PS_USER_OPTION = " -U ";
 const String PS_ALL_OPTION = " aux ";
-const String PS_IDS_OPTION = " ax -o pid= ";
+const String PS_IDS_OPTION = " ax -o pid ";
 
 
 // |---------( Process Control Command )---------|

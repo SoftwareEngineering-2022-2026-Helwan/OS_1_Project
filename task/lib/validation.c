@@ -29,7 +29,7 @@ int optionValidation( int min, int max)
 	return ch;
 }
 
-void getGroupName(String* groupName)
+void getUserName(String* groupName)
 {
 	*groupName = (String)malloc(500);
 	printf("\nEnter Group Name: ");

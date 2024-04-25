@@ -30,7 +30,7 @@ int main(int argc, String argv[])
 	}
 
 	int option, start;
-	String command = (String) malloc(500), groupName, serviceName, getServiceID;
+	String command = (String) malloc(500), userName, processName;
 	do
 	{
 		printMainMenu();
@@ -45,10 +45,10 @@ int main(int argc, String argv[])
 				break;
 			case 2:
 				
-				getGroupName(&groupName);
-				displayAllProcessByGroup(&command,groupName);
+				getUserName(&userName);
+				displayAllProcessByGroup(&command,userName);
 				
-				free(groupName);
+				free(userName);
 				break;
 			case 3:
 
@@ -58,54 +58,41 @@ int main(int argc, String argv[])
 			case 4:
 				//[!] if service is started shall we start it again 
 				printServiceHeader();
-				getProcessName(&serviceName);
+				getProcessName(&processName);
 				start = startServiceNow();
 				if(start == 1)
 				{
-					startProcess(&command,serviceName);
+					startProcess(&command,processName);
 
 				}
 				else if( start == 0)
 				{	
-					printf("\n[~] Stoping : %s\n",serviceName);
+					printf("\n[~] Stoping : %s\n",processName);
 
-					// Store service id in ENV variable 
-					getProcessId( &getServiceID,serviceName);
-
-					//stop the process	
-					sendSignal(selectedSignal(7), &command);
-
-					// run the env save and execute in the same time due to session per system call
-					prepareCommandWithProcessId(&command,getServiceID);
-
-					free(getServiceID);
-					free(serviceName);
+					stopProcess(&command, processName);
 					
 				}
 				
+				free(processName); 
 
 				break;
 			case 5:
 				printServiceHeader();
-				getProcessName(&serviceName); 
+				getProcessName(&processName); 
 
 				printSignalMenu();
 				int choice = optionValidation(0,9);
 
-				// Store service id in ENV variable 
-				getProcessId( &getServiceID,serviceName);
-				//stop the process	
-				sendSignal(selectedSignal(choice), &command);
+				if ( choice == 0)
+				{
+					free(processName);
+					continue;
+				} 
+				sendSignal(selectedSignal(choice), &command, processName);
 
-				// run the env save and execute in the same time due to session per system call
-				prepareCommandWithProcessId(&command,getServiceID);
+				printf("\n[-->] Sending %s Signal to %s\n",selectedSignal(choice),processName);
 
-				printf("\n[-->] Sending %s Signal to %s\n",selectedSignal(choice),serviceName);
-				
-				free(getServiceID);
-				free(serviceName);
-					
-
+				free(processName);
 				break;
 			
 		}
@@ -113,13 +100,6 @@ int main(int argc, String argv[])
 		if(option != 0)
 		{
 			system(command);
-
-			if(option == 4 && start == 1)
-			{
-				IsProcessRun(serviceName);
-
-				free(serviceName);
-			}
 		}
 		
 

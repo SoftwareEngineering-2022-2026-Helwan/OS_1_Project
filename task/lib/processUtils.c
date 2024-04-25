@@ -2,22 +2,6 @@
 #include<stdlib.h>
 #include<string.h>
 
-void getProcessId(String* getServiceID, String serviceName)
-{
-	*getServiceID = (char *) malloc(1000);
-	strcpy( *getServiceID, SET_PROCESS_NAME);
-	strcat( *getServiceID, serviceName);
-	strcat( *getServiceID, CLOSE_QUOTE);
-	strcat( *getServiceID, " && ");
-					
-}
-
-void sendSignal(String signal, String *command)
-{
-    strcpy( *command, KILL);
-	strcat( *command, signal); 
-	strcat( *command, GET_PROCESS_ID);
-}
 
 
 void displayAllProcess(String *command)
@@ -27,12 +11,12 @@ void displayAllProcess(String *command)
 	printListHeader();
 }
 
-void displayAllProcessByGroup(String *command, String groupName)
+void displayAllProcessByGroup(String *command, String userName)
 {
 	
 	strcpy(*command,PS);
-	strcat(*command,PS_GROUP_OPTION);
-	strcat(*command,groupName);
+	strcat(*command,PS_USER_OPTION);
+	strcat(*command,userName);
 	printListHeader();
 
 }
@@ -40,38 +24,31 @@ void displayAllProcessByGroup(String *command, String groupName)
 
 void displayAllProcessId(String *command)
 {
-	/*strcpy( *command, PS);
-	strcat( *command, PS_IDS_OPTION);
-	*/
-
 	sprintf(*command,"%s %s",PS,PS_IDS_OPTION);
 	printListHeader();
 }
 
+
+
 void startProcess(String *command, String serviceName)
 {
-	printf("\n[~] Starting : %s\n",serviceName);
-	strcpy(*command,START_BACKGROUND_PROCESS_PART1);
-	strcat(*command,serviceName);
-	strcat(*command,START_BACKGROUND_PROCESS_PART2);
+	strcpy(*command , serviceName);
+    strcat(*command , " &");
 }
 
-void IsProcessRun(String serviceName)
+void stopProcess(String *command, String processName)
 {
-	String command = (String) malloc(500);
-
-	strcpy(command, IS_PROCESS_UP_PART1);
-	strcat(command,serviceName);
-	strcat(command,IS_PROCESS_UP_PART2);
-
-	system(command);
-
-	free(command);
+    strcpy(*command ,PKILL);
+    strcat(*command ,SIG_KILL);
+    strcat(*command , processName);
 }
 
-void prepareCommandWithProcessId(String *command, String getProcessId)
+void sendSignal(String signal, String *command, String processName)
 {
-	strcat(getProcessId,*command); 
-	strcpy( *command, getProcessId);
-
+	strcpy(*command ,PKILL);
+    strcat(*command ,signal); 
+    strcat(*command ,processName); 
+    
 }
+
+
