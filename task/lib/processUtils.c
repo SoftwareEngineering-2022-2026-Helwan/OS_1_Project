@@ -17,6 +17,7 @@ void displayAllProcessByGroup(String *command, String userName)
 	strcpy(*command,PS);
 	strcat(*command,PS_USER_OPTION);
 	strcat(*command,userName);
+	strcat(*command," | less");
 	printListHeader();
 
 }

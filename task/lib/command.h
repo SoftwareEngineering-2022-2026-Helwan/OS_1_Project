@@ -8,8 +8,8 @@ typedef char* String;
 
 const String PS = "ps ";
 const String PS_USER_OPTION = " -U ";
-const String PS_ALL_OPTION = " aux ";
-const String PS_IDS_OPTION = " ax -o pid ";
+const String PS_ALL_OPTION = " aux | less";
+const String PS_IDS_OPTION = " ax -o pid | less";
 
 
 // |---------( Process Control Command )---------|

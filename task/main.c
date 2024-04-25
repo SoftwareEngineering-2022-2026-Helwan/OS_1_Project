@@ -100,11 +100,11 @@ int main(int argc, String argv[])
 		if(option != 0)
 		{
 			system(command);
+			free(command);
 		}
 		
 
 	}while(option != 0);
 
-	free(command);
 	return 0;
 }
