@@ -35,6 +35,13 @@ public class CPU
 
     public int timeQuantum = 0;
 
+    private double totalAverageWaitingTime;
+
+    private double totalAverageResponseTime;
+
+    private double totalAverageTurnAroundTime;
+
+
     // |----------------( Methods )----------------|
 
     CPU()
@@ -49,6 +56,31 @@ public class CPU
 
 
     // |----------------( Variable--Methods )----------------|
+
+
+    public double getTotalAverageWaitingTime() {
+        return totalAverageWaitingTime;
+    }
+
+    public void setTotalAverageWaitingTime(double totalAverageWaitingTime) {
+        this.totalAverageWaitingTime = totalAverageWaitingTime;
+    }
+
+    public double getTotalAverageResponseTime() {
+        return totalAverageResponseTime;
+    }
+
+    public void setTotalAverageResponseTime(double totalAverageResponseTime) {
+        this.totalAverageResponseTime = totalAverageResponseTime;
+    }
+
+    public double getTotalAverageTurnAroundTime() {
+        return totalAverageTurnAroundTime;
+    }
+
+    public void setTotalAverageTurnAroundTime(double totalAverageTurnAroundTime) {
+        this.totalAverageTurnAroundTime = totalAverageTurnAroundTime;
+    }
 
     public Queue<Process> getReadyQueue() {
         return readyQueue;
