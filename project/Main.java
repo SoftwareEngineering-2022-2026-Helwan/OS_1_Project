@@ -1,26 +1,41 @@
 import java.util.*;
 import java.awt.*;
 import java.io.*;
-import lib.*;
+
 
 public class Main
 {
     public static void main(String[] args) 
     {
-        if(args.length >= 2)
+        if(true)
         {
-            if(args[0].equals("-d"))
-            {
-                Debug debug = new Debug();
-                debug.startDebug(Integer.parseInt(args[1]));
-                return;
-            }
-            else
-            {
-                System.err.println("[!] Invalid Option! ");
-            }
+            Debug.startDebug(1);
         }
-        
-        System.err.println("Calling main");
     }
+}
+
+
+
+class Debug
+{
+
+    public static void startDebug(int task)
+    {
+        System.out.println("[!] Task"+task);
+        switch(task)
+        {
+            case 1:
+                task1();
+                break;
+
+        }
+    }
+
+
+    // |----------( Task methods )----------|
+    static void task1()
+    {
+        InputFrame i = new InputFrame();
+    }
+
 }
