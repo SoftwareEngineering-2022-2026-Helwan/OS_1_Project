@@ -105,19 +105,27 @@ public class Process implements Comparable{
 
     public void consumeBurstTime()
     {
-        //task6
+        burstTime -= 1;
     }
 
     public boolean isFinished()
     {
-        //task6
-        return false;
+        if(burstTime == 0)
+            return true;
+        else
+            return false;
     }
 
     @Override
     public int compareTo(Object o) {
-        //task6
-        return 0;
+        if(o instanceof Process){
+            if(this.arrivalTime > ((Process)o).getArrivalTime())
+                return this.arrivalTime;
+            else
+                return ((Process)o).getArrivalTime();
+        }
+        else
+        return -1;
     }
 
     @Override
