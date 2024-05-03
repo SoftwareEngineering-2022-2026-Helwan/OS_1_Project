@@ -273,22 +273,52 @@ public class CPU
         //task2
     }
 
-    private double calculateAverageWaitingTime()
+    public double calculateAverageWaitingTime()
     {
-        //task7
-        return 0.0;
+        int time = 0;
+        LinkedList<Process> waitingList = new LinkedList<>();
+
+        waitingList = (LinkedList<Process>) waitingQueue;
+
+
+        for(int i = 0 ; i < waitingList.size(); i++)
+        {
+            time += waitingList.get(i).getFinalWaitingTime();
+        }
+
+        return (double) time /Process.NumberOfProcess;
     }
 
-    private double calculateAverageResponseTime()
+    public double calculateAverageResponseTime()
     {
-        //task7
-        return 0.0;
+        int time = 0;
+        LinkedList<Process> waitingList = new LinkedList<>();
+
+        waitingList = (LinkedList<Process>) waitingQueue;
+
+
+        for(int i = 0 ; i < waitingList.size(); i++)
+        {
+            time += waitingList.get(i).getFinalResponseTime();
+        }
+
+        return (double) time /Process.NumberOfProcess;
     }
 
-    private double calculateAverageTurnAroundTime()
+    public double calculateAverageTurnAroundTime()
     {
-        //task7
-        return 0.0;
+        int time = 0;
+        LinkedList<Process> waitingList = new LinkedList<>();
+
+        waitingList = (LinkedList<Process>) waitingQueue;
+
+
+        for(int i = 0 ; i < waitingList.size(); i++)
+        {
+            time += waitingList.get(i).getFinalTurnAroundTime();
+        }
+
+        return (double) time /Process.NumberOfProcess;
     }
 
     @Override

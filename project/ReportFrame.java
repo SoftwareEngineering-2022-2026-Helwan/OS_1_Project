@@ -109,7 +109,7 @@ public class ReportFrame extends JFrame implements ActionListener {
         //fill the total average time here
 
 
-        t1=new JLabel(String.valueOf(cpu.getTotalAverageWaitingTime()));
+        t1=new JLabel(String.format("%.3f",cpu.getTotalAverageWaitingTime()));
         t1.setBounds(88,330,60,30);
         t1.setForeground(Color.green);
         t1.setFont(new Font("Consolas",Font.PLAIN,15));
@@ -118,7 +118,7 @@ public class ReportFrame extends JFrame implements ActionListener {
         t1.setOpaque(true);
         t1.setHorizontalAlignment(JLabel.CENTER);
 
-        t2=new JLabel(String.valueOf(cpu.getTotalAverageTurnAroundTime()));
+        t2=new JLabel(String.format("%.3f",cpu.getTotalAverageTurnAroundTime()));
         t2.setBounds(222+55,330,60,30);
         t2.setForeground(Color.green);
         t2.setFont(new Font("Consolas",Font.PLAIN,15));
@@ -127,7 +127,7 @@ public class ReportFrame extends JFrame implements ActionListener {
         t2.setOpaque(true);
         t2.setHorizontalAlignment(JLabel.CENTER);
 
-        t3=new JLabel(String.valueOf(cpu.getTotalAverageResponseTime()));
+        t3=new JLabel(String.format("%.3f",cpu.getTotalAverageResponseTime()));
         t3.setBounds(420+55,330,60,30);
         t3.setForeground(Color.green);
         t3.setFont(new Font("Consolas",Font.PLAIN,15));

@@ -9,7 +9,7 @@ public class Main
     {
         if(true)
         {
-            Debug.startDebug(10);
+            Debug.startDebug(7);
         }
     }
 }
@@ -40,6 +40,9 @@ class Debug
                 break;
             case 10:
                 task3();
+                break;
+            case 7:
+                task7();
                 break;
         }
     }
@@ -185,6 +188,45 @@ class Debug
         System.out.println(cpu.toString());
 
 
+
+    }
+
+    static void task7()
+    {
+        Process p1 = new Process("p1",0,4);
+        p1.setFinalWaitingTime(1);
+        p1.setFinalTurnAroundTime(4);
+        p1.setFinalResponseTime(0);
+        Process p2 = new Process("p2",1,2);
+        p2.setFinalWaitingTime(1);
+        p2.setFinalTurnAroundTime(6);
+        p2.setFinalResponseTime(2);
+        Process p3 = new Process("p3",1,2);
+        p3.setFinalWaitingTime(2);
+        p3.setFinalTurnAroundTime(8);
+        p3.setFinalResponseTime(4);
+
+        LinkedList<Process> pl = new LinkedList<>();
+        pl.add(p1);
+        pl.add(p2);
+        pl.add(p3);
+
+        CPU cpu = new CPU();
+
+        cpu.setWaitingQueue(pl);
+
+        double time = cpu.calculateAverageWaitingTime();
+        System.out.print("\nwaiting: ") ;
+        System.out.printf("%.3f",time) ;
+
+        time = cpu.calculateAverageResponseTime();
+        System.out.print("\nresponse: ") ;
+        System.out.printf("%.3f",time) ;
+
+
+        time = cpu.calculateAverageTurnAroundTime();
+        System.out.print("\nTurnAround: ") ;
+        System.out.printf("%.3f",time) ;
 
     }
 
