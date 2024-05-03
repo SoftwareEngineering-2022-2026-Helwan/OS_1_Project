@@ -27,7 +27,9 @@ class Debug
             case 1:
                 task1();
                 break;
-
+            case 2:
+                task2();
+                break;
         }
     }
 
@@ -36,6 +38,13 @@ class Debug
     static void task1()
     {
         InputFrame i = new InputFrame();
+        i.setBounds(new Rectangle(800,600));
+        i.setLocationRelativeTo(null);
+    }
+    static void task2()
+    {
+
+        CPU cpu = new CPU();
     }
 
 }

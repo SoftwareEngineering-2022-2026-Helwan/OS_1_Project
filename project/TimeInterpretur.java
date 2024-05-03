@@ -43,7 +43,7 @@ public class TimeInterpretur
 
     @Override
     public String toString() {
-        return "TimeInterpretur{" +
+        return "\nTimeInterpretur{" +
                 "timeQuantum=" + timeQuantum +
                 "Consumed timeQuantum=" + consumedQuantum +
                 '}';
