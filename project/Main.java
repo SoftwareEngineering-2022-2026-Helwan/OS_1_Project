@@ -45,7 +45,7 @@ class Debug
                 task8();
                 break;
             case 2:
-                task2_a();
+                task2();
         }
     }
 
@@ -254,7 +254,7 @@ class Debug
         GanttChart gc=new GanttChart(cpu);
     }
 
-    static void task2_a()
+    static void task2()
     {
         Process p1 = new Process("p1",0,4);
         Process p2 = new Process("p2",1,2);

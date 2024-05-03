@@ -265,7 +265,21 @@ public class CPU
 
     private void updateProcessTable(Process process)
     {
-        //task2
+        setCurrentProcessEndTime(clock);
+        processTableList.add
+        (
+            new ProcessTable
+            (
+                process.getProcessName(),
+                getCurrentProcessStartTime(),
+                getCurrentProcessEndTime()
+            )
+        );
+
+        setCurrentProcessEndTime(-1);
+        setCurrentProcessStartTime(-1);
+
+
     }
 
     public void buildReport()
