@@ -9,7 +9,7 @@ public class Main
     {
         if(true)
         {
-            Debug.startDebug(7);
+            Debug.startDebug(8);
         }
     }
 }
@@ -43,6 +43,9 @@ class Debug
                 break;
             case 7:
                 task7();
+                break;
+            case 8:
+                task8();
                 break;
         }
     }
@@ -228,6 +231,21 @@ class Debug
         System.out.print("\nTurnAround: ") ;
         System.out.printf("%.3f",time) ;
 
+    }
+
+    static void  task8()
+    {
+        ArrayList<ProcessTable> pt = new ArrayList<>();
+        pt.add(new ProcessTable("process1",0,2));
+        pt.add(new ProcessTable("process1",6,15));
+        pt.add(new ProcessTable("process2",2,4));
+        pt.add(new ProcessTable("process3",4,10));
+
+        pt = ProcessTable.sortProcessTable(pt);
+        CPU cpu = new CPU();
+        cpu.setProcessTableList(pt);
+        cpu.setMaxClock(15);
+        GanttChart gc=new GanttChart(cpu);
     }
 
 }
