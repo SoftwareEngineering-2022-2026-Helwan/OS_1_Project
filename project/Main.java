@@ -9,7 +9,7 @@ public class Main
     {
         if(true)
         {
-            Debug.startDebug(1);
+            Debug.startDebug(8);
         }
     }
 }
@@ -27,10 +27,7 @@ class Debug
             case 1:
                 task1();
                 break;
-            case 2:
-                task2();
-                break;
-            case 3:
+            case 6:
                 task6();
                 task6_b();
                 task6_c();
@@ -47,6 +44,8 @@ class Debug
             case 8:
                 task8();
                 break;
+            case 2:
+                task2_a();
         }
     }
 
@@ -57,11 +56,6 @@ class Debug
         InputFrame i = new InputFrame();
         i.setBounds(new Rectangle(800,600));
         i.setLocationRelativeTo(null);
-    }
-    static void task2()
-    {
-
-        CPU cpu = new CPU();
     }
 
     static void task6(){
@@ -222,8 +216,8 @@ class Debug
         p3.setFinalResponseTime(4);
 
         LinkedList<Process> pl = new LinkedList<>();
-        pl.add(p1);
         pl.add(p2);
+        pl.add(p1);
         pl.add(p3);
 
         CPU cpu = new CPU();
@@ -250,8 +244,8 @@ class Debug
         ArrayList<ProcessTable> pt = new ArrayList<>();
         pt.add(new ProcessTable("process1",0,2));
         pt.add(new ProcessTable("process1",6,15));
-        pt.add(new ProcessTable("process2",2,4));
         pt.add(new ProcessTable("process3",4,10));
+        pt.add(new ProcessTable("process2",2,4));
 
         pt = ProcessTable.sortProcessTable(pt);
         CPU cpu = new CPU();
@@ -260,4 +254,57 @@ class Debug
         GanttChart gc=new GanttChart(cpu);
     }
 
+    static void task2_a()
+    {
+        Process p1 = new Process("p1",0,4);
+        Process p2 = new Process("p2",1,2);
+        Process p3 = new Process("p3",1,2);
+
+        p1.setFinalWaitingTime(1);
+        p1.setFinalTurnAroundTime(4);
+        p1.setFinalResponseTime(0);
+
+        p2.setFinalWaitingTime(1);
+        p2.setFinalTurnAroundTime(6);
+        p2.setFinalResponseTime(2);
+
+        p3.setFinalWaitingTime(2);
+        p3.setFinalTurnAroundTime(8);
+        p3.setFinalResponseTime(4);
+
+        ProcessTable p1T = new ProcessTable(p1.getProcessName(), p1.getArrivalTime(), p1.getBurstTime());
+        ProcessTable p2T = new ProcessTable(p2.getProcessName(), p2.getArrivalTime(), p2.getBurstTime());
+        ProcessTable p3T = new ProcessTable(p3.getProcessName(), p3.getArrivalTime(), p3.getBurstTime());
+
+        ArrayList<ProcessTable> pt = new ArrayList<>();
+
+        pt.add(p2T);
+        pt.add(p3T);
+        pt.add(p1T);
+
+        p1T = new ProcessTable(p1.getProcessName(), p1.getArrivalTime()+5, p1.getBurstTime()+5);
+        p2T = new ProcessTable(p2.getProcessName(), p2.getArrivalTime()+10, p2.getBurstTime()+10);
+        p3T = new ProcessTable(p3.getProcessName(), p3.getArrivalTime()+50, p3.getBurstTime()+50);
+
+
+        pt.add(p1T);
+        pt.add(p2T);
+        pt.add(p3T);
+
+
+        LinkedList<Process> pl = new LinkedList<>();
+        pl.add(p2);
+        pl.add(p1);
+        pl.add(p3);
+
+        CPU cpu = new CPU();
+
+        cpu.setWaitingQueue(pl);
+        cpu.setProcessTableList(pt);
+
+        cpu.buildReport();
+
+        System.out.println(cpu.toString());
+
+    }
 }

@@ -270,7 +270,11 @@ public class CPU
 
     public void buildReport()
     {
-        //task2
+        setTotalAverageWaitingTime(calculateAverageWaitingTime());
+        setTotalAverageResponseTime(calculateAverageResponseTime());
+        setTotalAverageTurnAroundTime(calculateAverageTurnAroundTime());
+
+        processTableList = ProcessTable.sortProcessTable(processTableList);
     }
 
     public double calculateAverageWaitingTime()
@@ -338,6 +342,10 @@ public class CPU
                 ", \ncurrentProcessStartTime=" + currentProcessStartTime +
                 ", \ncurrentProcessEndTime=" + currentProcessEndTime +
                 ", \ntimeQuantum=" + timeQuantum +
+                ", \nTotalAverageResponseTime= " + totalAverageResponseTime +
+                ", \nTotalAverageTurnAroundTime= " + totalAverageTurnAroundTime +
+                ", \nTotalAverageWaitingTime= " + totalAverageWaitingTime +
+                ", \nprocessTableList= " + processTableList +
                 "\n}";
     }
 }
