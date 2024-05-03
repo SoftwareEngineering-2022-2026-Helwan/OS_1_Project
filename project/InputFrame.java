@@ -227,17 +227,10 @@ public class InputFrame extends JFrame implements ActionListener {
             label.setForeground(Color.pink);
 
             headPanal.add(label);
-            JPanel linePanal = new JPanel();
-            linePanal.setLayout(new BoxLayout(linePanal, BoxLayout.Y_AXIS));
-            JLabel upL = new JLabel("");
-            JLabel dwL = new JLabel("");
-            component = (JComponent) Box.createVerticalStrut(5);
 
-            linePanal.add(upL);
-            linePanal.add(component);
-            linePanal.add(dwL);
+            component = (JComponent) Box.createVerticalStrut(1);
 
-            headPanal.add(linePanal);
+            headPanal.add(component);
 
 
         }
