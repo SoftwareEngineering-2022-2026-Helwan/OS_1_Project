@@ -9,7 +9,7 @@ public class Main
     {
         if(true)
         {
-            Debug.startDebug(3);
+            Debug.startDebug(9);
         }
     }
 }
@@ -33,6 +33,9 @@ class Debug
             case 3:
                 task6();
                 task6_b();
+                break;
+            case 9:
+                task9();
                 break;
         }
     }
@@ -83,4 +86,40 @@ class Debug
 
         System.out.println(arrival.toString());
     }
+
+    static void task9()
+    {
+        ArrayList<Process> arrival = new ArrayList<>();
+
+        arrival.add(new Process("p1",0,4));
+        arrival.get(0).setFinalResponseTime(19);
+        arrival.get(0).setFinalWaitingTime(5);
+        arrival.get(0).setFinalTurnAroundTime(2);
+        arrival.add(new Process("p2",1,4));
+        arrival.get(1).setFinalResponseTime(29);
+        arrival.get(1).setFinalWaitingTime(25);
+        arrival.get(1).setFinalTurnAroundTime(22);
+        arrival.add(new Process("p3",0,4));
+        arrival.get(2).setFinalResponseTime(90);
+        arrival.get(2).setFinalWaitingTime(50);
+        arrival.get(2).setFinalTurnAroundTime(20);
+        arrival.add(new Process("p4",2,4));
+        arrival.get(3).setFinalResponseTime(49);
+        arrival.get(3).setFinalWaitingTime(45);
+        arrival.get(3).setFinalTurnAroundTime(42);
+        arrival.add(new Process("p5",1,4));
+        arrival.get(4).setFinalResponseTime(39);
+        arrival.get(4).setFinalWaitingTime(76);
+        arrival.get(4).setFinalTurnAroundTime(7);
+
+        CPU cpu = new CPU(arrival,0);
+
+        cpu.setTotalAverageWaitingTime(19.5);
+        cpu.setTotalAverageTurnAroundTime(30.0);
+        cpu.setTotalAverageResponseTime(9.5);
+        System.out.println(cpu.toString());
+
+        ReportFrame r = new ReportFrame(cpu);
+    }
+
 }

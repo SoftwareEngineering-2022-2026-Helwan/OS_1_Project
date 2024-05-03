@@ -201,7 +201,8 @@ public class InputFrame extends JFrame implements ActionListener {
         }
         if (e.getSource()==submit)
         {
-            ReportFrame report=new ReportFrame();
+            //put cpu in constructor
+            ReportFrame report=new ReportFrame(null);
             report.setLocationRelativeTo(null);
         }
     }
@@ -246,8 +247,6 @@ public class InputFrame extends JFrame implements ActionListener {
             processPanal.setBackground(Color.gray);
             processPanal.setLayout(new BoxLayout(processPanal, BoxLayout.X_AXIS));
 
-
-//            processPanal.add(Box.createVerticalStrut(1));
 
             label =  new JLabel("               " + pro.getProcessName(),SwingConstants.CENTER);
 

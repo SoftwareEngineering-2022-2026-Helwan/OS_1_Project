@@ -6,15 +6,16 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class ReportFrame extends JFrame implements ActionListener {
-    public JLabel process,waiting,turn,response,totalwait,totalturn,totalresponse,t1,t2,t3;
+    public JLabel process,waiting,turn,response,totalwait,totalturn,totalresponse,t1,t2,t3,label;
 
     public JPanel panel2,panel;
     public JScrollPane scroll;
-    public ArrayList<String> PROCESS=new ArrayList<String>();
-    CPU cpu=new CPU();
+    CPU cpu;
 
     public  JButton close;
-    ReportFrame(){
+    ReportFrame(CPU cpuData){
+
+        cpu = cpuData;
         Border border=BorderFactory.createLineBorder(Color.black,3);
 
 
@@ -28,9 +29,47 @@ public class ReportFrame extends JFrame implements ActionListener {
         panel2.setLayout(new BoxLayout(panel2, BoxLayout.Y_AXIS));
 
         //fill the scroll with process here
+        Border borderLabel = BorderFactory.createLineBorder(Color.white);
+        JPanel processPanal ;
+        for (Process pro :cpu.waitingQueue) {
+            processPanal = new JPanel();
+            processPanal.setBackground(Color.darkGray);
+            processPanal.setLayout(new BoxLayout(processPanal, BoxLayout.X_AXIS));
+
+
+            label =  new JLabel("               " + pro.getProcessName(),SwingConstants.CENTER);
+
+            label.setForeground(Color.green);
+            processPanal.add(label);
+
+            processPanal.add(Box.createVerticalStrut(40));
+
+            label =   new JLabel("                " + pro.getFinalWaitingTime(),SwingConstants.CENTER);
+
+            label.setForeground(Color.green);
+            processPanal.add(label);
+
+            processPanal.add(Box.createVerticalStrut(40));
+
+            label = new JLabel("                    " + pro.getFinalTurnAroundTime(),SwingConstants.CENTER);
+
+            label.setForeground(Color.green);
+            processPanal.add(label);
+
+            processPanal.add(Box.createVerticalStrut(40));
+
+            label = new JLabel("                        " + pro.getFinalResponseTime(),SwingConstants.CENTER);
+
+            label.setForeground(Color.green);
+            processPanal.add(label);
+
+            processPanal.add(Box.createVerticalStrut(1));
+            processPanal.setBorder(borderLabel);
+            panel2.add(processPanal);
+        }
 
         scroll=new JScrollPane(panel2,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        scroll.setBounds(41,120,497,180);
+        scroll.setBounds(41,120,520,180);
 
         process=new JLabel("Process Name");
         process.setBounds(42,75,200,50);
@@ -67,36 +106,38 @@ public class ReportFrame extends JFrame implements ActionListener {
         totalresponse.setForeground(Color.black);
         totalresponse.setFont(new Font("Consolas",Font.BOLD,15));
 
-        cpu.setTotalAverageWaitingTime(9.5);
-        cpu.setTotalAverageResponseTime(11.9);
-        cpu.setTotalAverageTurnAroundTime(99.6);
+        //fill the total average time here
+
 
         t1=new JLabel(String.valueOf(cpu.getTotalAverageWaitingTime()));
-        t1.setBounds(48,330,60,30);
+        t1.setBounds(88,330,60,30);
         t1.setForeground(Color.green);
         t1.setFont(new Font("Consolas",Font.PLAIN,15));
         t1.setBorder(border);
         t1.setBackground(Color.DARK_GRAY);
         t1.setOpaque(true);
+        t1.setHorizontalAlignment(JLabel.CENTER);
 
         t2=new JLabel(String.valueOf(cpu.getTotalAverageTurnAroundTime()));
-        t2.setBounds(222,330,60,30);
+        t2.setBounds(222+55,330,60,30);
         t2.setForeground(Color.green);
         t2.setFont(new Font("Consolas",Font.PLAIN,15));
         t2.setBorder(border);
         t2.setBackground(Color.DARK_GRAY);
         t2.setOpaque(true);
+        t2.setHorizontalAlignment(JLabel.CENTER);
 
         t3=new JLabel(String.valueOf(cpu.getTotalAverageResponseTime()));
-        t3.setBounds(420,330,60,30);
+        t3.setBounds(420+55,330,60,30);
         t3.setForeground(Color.green);
         t3.setFont(new Font("Consolas",Font.PLAIN,15));
         t3.setBorder(border);
         t3.setBackground(Color.DARK_GRAY);
         t3.setOpaque(true);
+        t3.setHorizontalAlignment(JLabel.CENTER);
 
         close=new JButton("Close");
-        close.setBounds(217,415,115,40);
+        close.setBounds(217,400,115,40);
         close.setBackground(Color.cyan);
         close.addActionListener(this);
 

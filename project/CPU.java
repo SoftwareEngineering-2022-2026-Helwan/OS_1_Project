@@ -42,6 +42,7 @@ public class CPU
 
     private double totalAverageTurnAroundTime;
 
+    public TimeInterpretur timeInterpretur;
 
     // |----------------( Methods )----------------|
 
@@ -52,13 +53,25 @@ public class CPU
     CPU(ArrayList<Process> arrivalQueue, int timeQuantum)
     {
         this.arrivalQueue = arrivalQueue;
+        sortArrivalQueue();
+        setMaxClock(calculateMaxClock(arrivalQueue));
         this.timeQuantum = timeQuantum;
+        timeInterpretur = new TimeInterpretur(timeQuantum);
     }
 
 
     // |----------------( Variable--Methods )----------------|
 
-
+    private int calculateMaxClock(ArrayList<Process> arrivalList)
+    {
+        int index = 0, maxClockCounter = 0;
+        while (index < arrivalList.size())
+        {
+            maxClockCounter += arrivalList.get(index).getBurstTime();
+            index++;
+        }
+        return maxClockCounter;
+    }
     public double getTotalAverageWaitingTime() {
         return totalAverageWaitingTime;
     }
@@ -279,20 +292,20 @@ public class CPU
     @Override
     public String toString() {
         return "\nCPU{" +
-                "readyQueue=" + readyQueue +
-                ", finishedQueue=" + finishedQueue +
-                ", waitingQueue=" + waitingQueue +
-                ", arrivalQueue=" + arrivalQueue +
-                ", currentProcess=" + currentProcess +
-                ", nextIndex=" + nextIndex +
-                ", currentIndex=" + currentIndex +
-                ", remainingProcess=" + remainingProcess +
-                ", processTableList=" + processTableList +
-                ", clock=" + clock +
-                ", maxClock=" + maxClock +
-                ", currentProcessStartTime=" + currentProcessStartTime +
-                ", currentProcessEndTime=" + currentProcessEndTime +
-                ", timeQuantum=" + timeQuantum +
-                '}';
+                "\nreadyQueue=" + readyQueue +
+                ", \nfinishedQueue=" + finishedQueue +
+                ", \nwaitingQueue=" + waitingQueue +
+                ", \narrivalQueue=" + arrivalQueue +
+                ", \ncurrentProcess=" + currentProcess +
+                ", \nnextIndex=" + nextIndex +
+                ", \ncurrentIndex=" + currentIndex +
+                ", \nremainingProcess=" + remainingProcess +
+                ", \nprocessTableList=" + processTableList +
+                ", \nclock=" + clock +
+                ", \nmaxClock=" + maxClock +
+                ", \ncurrentProcessStartTime=" + currentProcessStartTime +
+                ", \ncurrentProcessEndTime=" + currentProcessEndTime +
+                ", \ntimeQuantum=" + timeQuantum +
+                "\0}";
     }
 }
