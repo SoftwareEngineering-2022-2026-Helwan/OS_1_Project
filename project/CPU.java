@@ -196,14 +196,31 @@ public class CPU
 
     public int getWasActiveProcess()
     {
-        //task 6
+        int ret = 0;
+        if(!readyQueue.isEmpty())
+        {
+            Queue<Process> q2 = new LinkedList<>();
+            Process p;
+            
+            for(int i = 0; i < readyQueue.size();i++){
+                p = readyQueue.remove();
+                if(p.getWasActive() == 1){
+                    ret = 1;
+                    p.setWasActive(0);   
+                }
+                q2.add(p);
+            }
+            readyQueue.addAll(q2);
+        }
+        else 
+            return -1;
 
-        return 0;
+        return ret;
     }
 
     private void sortArrivalQueue()
     {
-        //task6
+        
     }
 
     // |----------------( Class--Methods )----------------|
