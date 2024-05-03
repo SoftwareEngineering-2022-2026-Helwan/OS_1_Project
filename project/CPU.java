@@ -49,6 +49,7 @@ public class CPU
     {
         Process p1 = new Process("p2",6,4);
         Process p2 = new Process("p1",4,4);
+        Process p2 = new Process("p2",4,4);
         arrivalQueue.add(p1);
         arrivalQueue.add(p2);
 
