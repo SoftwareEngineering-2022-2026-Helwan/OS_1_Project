@@ -255,12 +255,24 @@ public class CPU
 
     private void activeProcessHandler(Process process)
     {
-        //task1
+        if(process.getFinalResponseTime() == -1)
+        {
+            process.setFinalResponseTime(clock);
+        }
+
+        if (getCurrentProcessStartTime() == -1)
+        {
+            setCurrentProcessStartTime(clock);
+        }
+
     }
 
     private void waitingProcessHandler(Process process)
     {
-        //task1
+        if(process.getWasActive() != 1)
+        {
+            process.setFinalWaitingTime( process.getFinalWaitingTime() + 1 );
+        }
     }
 
     private void updateProcessTable(Process process)

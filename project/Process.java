@@ -15,7 +15,7 @@ public class Process implements Comparable{
 
     private int finalTurnAroundTime;
 
-    private int finalResponseTime;
+    private int finalResponseTime = -1;
 
     public static int NumberOfProcess = 0;
 
