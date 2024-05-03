@@ -54,7 +54,9 @@ public class CPU
     {
         this.arrivalQueue = arrivalQueue;
         sortArrivalQueue();
+
         setMaxClock(calculateMaxClock(arrivalQueue));
+
         this.timeQuantum = timeQuantum;
         timeInterpretur = new TimeInterpretur(timeQuantum);
     }

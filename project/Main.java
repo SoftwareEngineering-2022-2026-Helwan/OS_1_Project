@@ -9,7 +9,7 @@ public class Main
     {
         if(true)
         {
-            Debug.startDebug(1);
+            Debug.startDebug(3);
         }
     }
 }
@@ -33,6 +33,7 @@ class Debug
             case 3:
                 task6();
                 task6_b();
+                task6_c();
                 break;
             case 9:
                 task9();
@@ -85,6 +86,26 @@ class Debug
         cpu.sortArrivalQueue();
 
         System.out.println(arrival.toString());
+    }
+    static void task6_c()
+    {
+
+        LinkedList<Process> arrival = new LinkedList<>();
+
+        arrival.add(new Process("p1",0,4));
+        arrival.add(new Process("p2",1,4));
+        arrival.get(1).setWasActive(0);
+        arrival.add(new Process("p3",0,4));
+        arrival.add(new Process("p4",2,4));
+        arrival.add(new Process("p5",1,4));
+
+
+
+        CPU cpu = new CPU();
+        cpu.setReadyQueue(arrival);
+        System.out.println("ret = "+ cpu.getWasActiveProcess() +" was active now: "+ arrival.get(1).getWasActive());
+
+
     }
 
     static void task9()
