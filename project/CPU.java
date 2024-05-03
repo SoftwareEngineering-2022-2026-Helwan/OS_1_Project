@@ -22,7 +22,7 @@ public class CPU
 
     private int currentIndex = 0;
 
-    private int remainingProcess = 0;
+    private static int remainingProcess = 0;
 
     public ArrayList<ProcessTable> processTableList = new ArrayList<>();
 

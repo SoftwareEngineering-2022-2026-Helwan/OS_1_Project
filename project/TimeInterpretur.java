@@ -34,11 +34,17 @@ public class TimeInterpretur
     private void processStatusHandler(Process process)
     {
         //task3
+
     }
 
     public void currentProcessHandler(Process process)
     {
-        //task3
+        processStatusHandler(process);
+        if (process.getStatus() == 1) {
+            process.consumeBurstTime();
+            consumedQuantum++;
+            processStatusHandler(process);
+        }
     }
 
     @Override
