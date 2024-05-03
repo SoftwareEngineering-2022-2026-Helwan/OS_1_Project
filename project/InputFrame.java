@@ -95,7 +95,7 @@ public class InputFrame extends JFrame implements ActionListener {
         clear.setBackground(Color.cyan);
         clear.addActionListener(this);
 
-        submit=new JButton("Submit");
+        submit=new JButton("Simulate");
         submit.setBounds(525,375,115,40);
         submit.setBackground(Color.cyan);
         submit.addActionListener(this);

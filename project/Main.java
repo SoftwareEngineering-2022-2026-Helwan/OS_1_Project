@@ -9,7 +9,7 @@ public class Main
     {
         if(true)
         {
-            Debug.startDebug(8);
+            Debug.startDebug(1);
         }
     }
 }
@@ -142,7 +142,18 @@ class Debug
         arrival.get(4).setFinalWaitingTime(76);
         arrival.get(4).setFinalTurnAroundTime(7);
 
+        ArrayList<ProcessTable> pt = new ArrayList<>();
+        pt.add(new ProcessTable("process1",0,2));
+        pt.add(new ProcessTable("process1",6,15));
+        pt.add(new ProcessTable("process2",2,4));
+        pt.add(new ProcessTable("process3",4,10));
+
+        pt = ProcessTable.sortProcessTable(pt);
+
         CPU cpu = new CPU(arrival,0);
+
+        cpu.setProcessTableList(pt);
+        cpu.setMaxClock(15);
 
         cpu.setTotalAverageWaitingTime(19.5);
         cpu.setTotalAverageTurnAroundTime(30.0);
@@ -150,6 +161,7 @@ class Debug
         System.out.println(cpu.toString());
 
         ReportFrame r = new ReportFrame(cpu);
+        r.setLocationRelativeTo(null);
     }
 
     static void task3()

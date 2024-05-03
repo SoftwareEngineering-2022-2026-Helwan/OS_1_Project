@@ -12,7 +12,7 @@ public class ReportFrame extends JFrame implements ActionListener {
     public JScrollPane scroll;
     CPU cpu;
 
-    public  JButton close;
+    public  JButton close,gantt;
     ReportFrame(CPU cpu){
 
         this.cpu = cpu;
@@ -137,9 +137,14 @@ public class ReportFrame extends JFrame implements ActionListener {
         t3.setHorizontalAlignment(JLabel.CENTER);
 
         close=new JButton("Close");
-        close.setBounds(217,400,115,40);
+        close.setBounds(180,400,115,40);
         close.setBackground(Color.cyan);
         close.addActionListener(this);
+
+        gantt=new JButton("GanttChart");
+        gantt.setBounds(350,400,115,40);
+        gantt.setBackground(Color.cyan);
+        gantt.addActionListener(this);
 
         panel.add(process);
         panel.add(waiting);
@@ -155,6 +160,7 @@ public class ReportFrame extends JFrame implements ActionListener {
         panel.add(scroll);
 
         panel.add(close);
+        panel.add(gantt);
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(720,496);
@@ -170,6 +176,12 @@ public class ReportFrame extends JFrame implements ActionListener {
         if(e.getSource()==close)
         {
             this.dispose();
+        }
+        if(e.getSource()==gantt)
+        {
+            GanttChart chart = new GanttChart(cpu);
+            chart.setTitle("Gantt Chart");
+            chart.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         }
 
     }

@@ -12,7 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class GanttChart {
+public class GanttChart extends JFrame{
     public ArrayList<ProcessTable> pt = new ArrayList<>();
     TaskSeriesCollection dataset = new TaskSeriesCollection();
 
@@ -50,16 +50,13 @@ public class GanttChart {
         plot.getDomainAxis().setCategoryMargin(0.2);
         plot.setRenderer(renderer);
 
-        SwingUtilities.invokeLater(() -> {
-            // Create and set up the window
-            JFrame frame = new JFrame("Gantt Chart");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.add(new ChartPanel(chart));
-            // Display the window
-            frame.pack();
-            frame.setVisible(true);
-            frame.setBounds(new Rectangle(frame.getWidth()+350,frame.getHeight()));
-            frame.setLocationRelativeTo(null);
-        });
+
+        this.add(new ChartPanel(chart));
+        // Display the window
+        this.pack();
+        this.setVisible(true);
+        this.setBounds(new Rectangle(this.getWidth()+350,this.getHeight()));
+        this.setLocationRelativeTo(null);
+
     }
 }
