@@ -13,9 +13,9 @@ public class ReportFrame extends JFrame implements ActionListener {
     CPU cpu;
 
     public  JButton close;
-    ReportFrame(CPU cpuData){
+    ReportFrame(CPU cpu){
 
-        cpu = cpuData;
+        this.cpu = cpu;
         Border border=BorderFactory.createLineBorder(Color.black,3);
 
 

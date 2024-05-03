@@ -18,17 +18,17 @@ public class CPU
 
     private Process currentProcess;
 
-    private int nextIndex = 0;
+    private static int nextIndex = 0;
 
-    private int currentIndex = 0;
+    private static int currentIndex = 0;
 
-    private static int remainingProcess = 0;
+    private  int remainingProcess = 0;
 
     public ArrayList<ProcessTable> processTableList = new ArrayList<>();
 
     private int clock = 0;
 
-    private static int maxClock = 0;
+    private int maxClock = 0;
 
     private int currentProcessStartTime = -1;
 
@@ -58,7 +58,7 @@ public class CPU
         setMaxClock(calculateMaxClock(arrivalQueue));
 
         this.timeQuantum = timeQuantum;
-        timeInterpretur = new TimeInterpretur(timeQuantum);
+        timeInterpretur = new TimeInterpretur(this);
     }
 
 
@@ -138,27 +138,27 @@ public class CPU
         this.currentProcess = currentProcess;
     }
 
-    public int getNextIndex() {
+    public  int getNextIndex() {
         return nextIndex;
     }
 
-    public void setNextIndex(int nextIndex) {
+    public  void setNextIndex(int nextIndex) {
         this.nextIndex = nextIndex;
     }
 
-    public int getCurrentIndex() {
+    public  int getCurrentIndex() {
         return currentIndex;
     }
 
-    public void setCurrentIndex(int currentIndex) {
+    public  void setCurrentIndex(int currentIndex) {
         this.currentIndex = currentIndex;
     }
 
-    public static int getRemainingProcess() {
+    public  int getRemainingProcess() {
         return remainingProcess;
     }
 
-    public void setRemainingProcess(int remainingProcess) {
+    public  void setRemainingProcess(int remainingProcess) {
         this.remainingProcess = remainingProcess;
     }
 
@@ -178,7 +178,7 @@ public class CPU
         this.clock = clock;
     }
 
-    public static int getMaxClock() {
+    public  int getMaxClock() {
         return maxClock;
     }
 
@@ -308,6 +308,6 @@ public class CPU
                 ", \ncurrentProcessStartTime=" + currentProcessStartTime +
                 ", \ncurrentProcessEndTime=" + currentProcessEndTime +
                 ", \ntimeQuantum=" + timeQuantum +
-                "\0}";
+                "\n}";
     }
 }

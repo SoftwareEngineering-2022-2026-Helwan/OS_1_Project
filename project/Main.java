@@ -9,7 +9,7 @@ public class Main
     {
         if(true)
         {
-            Debug.startDebug(3);
+            Debug.startDebug(10);
         }
     }
 }
@@ -37,6 +37,9 @@ class Debug
                 break;
             case 9:
                 task9();
+                break;
+            case 10:
+                task3();
                 break;
         }
     }
@@ -141,6 +144,48 @@ class Debug
         System.out.println(cpu.toString());
 
         ReportFrame r = new ReportFrame(cpu);
+    }
+
+    static void task3()
+    {
+        Process p1 = new Process("p1",0,4);
+        Process p2 = new Process("p2",1,2);
+        Process p3 = new Process("p3",1,2);
+
+        ArrayList<Process> pl = new ArrayList<>();
+        pl.add(p1);
+        pl.add(p2);
+        pl.add(p3);
+
+        CPU cpu = new CPU(pl,2);
+
+
+        TimeInterpretur timeInterpretur = new TimeInterpretur(cpu);
+
+        cpu.setRemainingProcess(3);
+
+        //clock 0
+        timeInterpretur.processHandler(p1);
+        timeInterpretur.processHandler(p2);
+        timeInterpretur.processHandler(p3);
+
+
+        //clock 1
+        timeInterpretur.processHandler(p1);
+        timeInterpretur.processHandler(p2);
+        timeInterpretur.processHandler(p3);
+
+        //clock 2
+        timeInterpretur.processHandler(p1);
+        cpu.setCurrentIndex(cpu.getNextIndex());
+        timeInterpretur.processHandler(p2);
+        timeInterpretur.processHandler(p3);
+
+
+        System.out.println(cpu.toString());
+
+
+
     }
 
 }
