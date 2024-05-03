@@ -221,7 +221,7 @@ public class CPU
 
     private void sortArrivalQueue()
     {
-        
+        arrivalQueue.sort(Process::compareTo);        
     }
 
     // |----------------( Class--Methods )----------------|
