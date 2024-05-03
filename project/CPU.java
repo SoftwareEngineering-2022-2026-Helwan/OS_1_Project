@@ -28,7 +28,7 @@ public class CPU
 
     private int clock = 0;
 
-    private int maxClock = 0;
+    private static int maxClock = 0;
 
     private int currentProcessStartTime = -1;
 
@@ -154,7 +154,7 @@ public class CPU
         this.currentIndex = currentIndex;
     }
 
-    public int getRemainingProcess() {
+    public static int getRemainingProcess() {
         return remainingProcess;
     }
 
@@ -178,7 +178,7 @@ public class CPU
         this.clock = clock;
     }
 
-    public int getMaxClock() {
+    public static int getMaxClock() {
         return maxClock;
     }
 
