@@ -47,15 +47,6 @@ public class CPU
 
     CPU()
     {
-        Process p1 = new Process("p2",6,4);
-        Process p2 = new Process("p1",4,4);
-        Process p2 = new Process("p2",4,4);
-        arrivalQueue.add(p1);
-        arrivalQueue.add(p2);
-
-        arrivalQueue.sort(Process::compareTo);
-
-        System.out.println(arrivalQueue.toString());
     }
 
     CPU(ArrayList<Process> arrivalQueue, int timeQuantum)
