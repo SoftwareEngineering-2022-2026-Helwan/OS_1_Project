@@ -53,12 +53,15 @@ class Debug
     static void task6(){
         ArrayList<ProcessTable> pt = new ArrayList<>();
         pt.add(new ProcessTable("process1",0,3));
+        pt.add(new ProcessTable("process1",0,6));
         pt.add(new ProcessTable("process2",4,6));
         pt.add(new ProcessTable("process1",7,10));
         pt.add(new ProcessTable("process3",11,15));
+        pt.add(new ProcessTable("process3",13,15));
         pt.add(new ProcessTable("process2",16,20));
+        pt.add(new ProcessTable("process3",15,15));
 
-        pt = pt.get(1).sortProcessTable(pt);
+        pt = ProcessTable.sortProcessTable(pt);
 
         System.out.println(pt.toString());
     }

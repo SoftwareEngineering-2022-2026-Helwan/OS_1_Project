@@ -53,19 +53,34 @@ public class ProcessTable
 
     public static ArrayList<ProcessTable> sortProcessTable(ArrayList<ProcessTable> processTableList)
     {
-        ProcessTable p1 = new ProcessTable();
-        ProcessTable p2 = new ProcessTable();
+        ProcessTable p1 ;
+        ProcessTable p2 ;
         ArrayList<ProcessTable> list = new ArrayList<>();
 
-        for(int i = 0;i < processTableList.size() -1; i++){
-            p1 = list.get(i);
-            for(int j = 0;j < processTableList.size() -1; j++){
-                p2 = list.get(j);
-                if(p1.processName.compareTo(p2.processName) == 0)
+        for(int i = 0; !processTableList.isEmpty() ; i++){
+
+            p1 = processTableList.get(0);
+
+            for(int j = 0;j < processTableList.size() ; j++){
+                p2 = processTableList.get(j);
+                if(p1.processName.compareTo(p2.processName) == 0 )
+                {
                     list.add(p2);
+                    processTableList.remove(j);
+                }
             }
+            processTableList.remove(p1);
         }
 
         return list;
+    }
+
+    @Override
+    public String toString() {
+        return "\nProcessTable{" +
+                "processName='" + processName + '\'' +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                '}';
     }
 }

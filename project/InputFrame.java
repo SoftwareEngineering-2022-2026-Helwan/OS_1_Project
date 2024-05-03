@@ -201,8 +201,8 @@ public class InputFrame extends JFrame implements ActionListener {
         }
         if (e.getSource()==submit)
         {
-            this.dispose();
             ReportFrame report=new ReportFrame();
+            report.setLocationRelativeTo(null);
         }
     }
     private void panelscroll() {

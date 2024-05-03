@@ -24,20 +24,10 @@ public class ReportFrame extends JFrame implements ActionListener {
 
         panel2=new JPanel();
         panel2.setBounds(41,120,497,180);
-        panel2.setBackground(Color.pink);
+        panel2.setBackground(Color.gray);
         panel2.setLayout(new BoxLayout(panel2, BoxLayout.Y_AXIS));
 
-        PROCESS.add("p1  8  9  7 ");
-        PROCESS.add("p2  8  9  7 ");
-        PROCESS.add("p3  8  9  7 ");
-        PROCESS.add("p4  8  9  7 ");
-        PROCESS.add("p5  8  9  7 ");
-
-
-        for (int i=0;i<PROCESS.size();i++)
-        {
-            panel2.add(new JLabel(PROCESS.get(i)));
-        }
+        //fill the scroll with process here
 
         scroll=new JScrollPane(panel2,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         scroll.setBounds(41,120,497,180);
