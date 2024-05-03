@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class InputFrame extends JFrame implements ActionListener {
     public int Quant;
-
+    CPU cpu;
     public ArrayList<Process> PROCESS=new ArrayList<Process>();
     public JLabel addprocess,nameprocess,arrival,burst,quantum,label;
     public JTextField processname,arriv,burs,quant;
@@ -178,6 +178,8 @@ public class InputFrame extends JFrame implements ActionListener {
                     {
                         Quant=quantum;
                         quant.setText("");
+                        JOptionPane.showMessageDialog(null,"Quantum is : "+ Quant,"Added",JOptionPane.INFORMATION_MESSAGE);
+
                     }
                     else {
                         JOptionPane.showMessageDialog(null,"enter inputs","error",JOptionPane.ERROR_MESSAGE);
@@ -202,7 +204,8 @@ public class InputFrame extends JFrame implements ActionListener {
         if (e.getSource()==submit)
         {
             //put cpu in constructor
-            ReportFrame report=new ReportFrame(null);
+            cpu = new CPU(PROCESS,Quant);
+            ReportFrame report=new ReportFrame(cpu);
             report.setLocationRelativeTo(null);
         }
     }
