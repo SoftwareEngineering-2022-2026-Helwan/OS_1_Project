@@ -51,10 +51,21 @@ public class ProcessTable
         this.endTime = endTime;
     }
 
-    public ArrayList<ProcessTable> sortProcessTable(ArrayList<ProcessTable> processTableList)
+    public static ArrayList<ProcessTable> sortProcessTable(ArrayList<ProcessTable> processTableList)
     {
-        
+        ProcessTable p1 = new ProcessTable();
+        ProcessTable p2 = new ProcessTable();
+        ArrayList<ProcessTable> list = new ArrayList<>();
 
-        return null;
+        for(int i = 0;i < processTableList.size() -1; i++){
+            p1 = list.get(i);
+            for(int j = 0;j < processTableList.size() -1; j++){
+                p2 = list.get(j);
+                if(p1.processName.compareTo(p2.processName) == 0)
+                    list.add(p2);
+            }
+        }
+
+        return list;
     }
 }
