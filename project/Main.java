@@ -32,6 +32,7 @@ class Debug
                 break;
             case 3:
                 task6();
+                task6_b();
                 break;
         }
     }
@@ -64,5 +65,22 @@ class Debug
         pt = ProcessTable.sortProcessTable(pt);
 
         System.out.println(pt.toString());
+    }
+
+    static void task6_b()
+    {
+        ArrayList<Process> arrival = new ArrayList<>();
+
+        arrival.add(new Process("p1",0,4));
+        arrival.add(new Process("p2",1,4));
+        arrival.add(new Process("p3",0,4));
+        arrival.add(new Process("p4",2,4));
+        arrival.add(new Process("p5",1,4));
+
+        CPU cpu = new CPU(arrival,0);
+
+        cpu.sortArrivalQueue();
+
+        System.out.println(arrival.toString());
     }
 }

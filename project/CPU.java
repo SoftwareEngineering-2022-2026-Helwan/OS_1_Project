@@ -219,7 +219,7 @@ public class CPU
         return ret;
     }
 
-    private void sortArrivalQueue()
+    public void sortArrivalQueue()
     {
         arrivalQueue.sort(Process::compareTo);        
     }
