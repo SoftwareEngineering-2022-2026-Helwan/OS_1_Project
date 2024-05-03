@@ -9,7 +9,7 @@ public class Main
     {
         if(true)
         {
-            Debug.startDebug(1);
+            Debug.startDebug(3);
         }
     }
 }
@@ -30,6 +30,9 @@ class Debug
             case 2:
                 task2();
                 break;
+            case 3:
+                task6();
+                break;
         }
     }
 
@@ -47,4 +50,16 @@ class Debug
         CPU cpu = new CPU();
     }
 
+    static void task6(){
+        ArrayList<ProcessTable> pt = new ArrayList<>();
+        pt.add(new ProcessTable("process1",0,3));
+        pt.add(new ProcessTable("process2",4,6));
+        pt.add(new ProcessTable("process1",7,10));
+        pt.add(new ProcessTable("process3",11,15));
+        pt.add(new ProcessTable("process2",16,20));
+
+        pt = pt.get(1).sortProcessTable(pt);
+
+        System.out.println(pt.toString());
+    }
 }
