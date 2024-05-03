@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,20 +8,21 @@ import java.util.ArrayList;
 public class InputFrame extends JFrame implements ActionListener {
     public int Quant;
 
-    public ArrayList<String> PROCESS=new ArrayList<String>();
+    public ArrayList<Process> PROCESS=new ArrayList<Process>();
     public JLabel addprocess,nameprocess,arrival,burst,quantum,label;
-    public TextField processname,arriv,burs,quant;
+    public JTextField processname,arriv,burs,quant;
     public JButton add_process,add_quantun,clear,submit;
     public JPanel panel2,panel;
     public JScrollPane scroll;
     InputFrame(){
+
         panel=new JPanel();
         panel.setBounds(0,0,720,496);
         panel.setLayout(null);
 
         panel2=new JPanel();
         panel2.setBounds(499,96,195,180);
-        panel2.setBackground(Color.pink);
+        panel2.setBackground(Color.darkGray);
         panel2.setLayout(new BoxLayout(panel2, BoxLayout.Y_AXIS));
 
         addprocess=new JLabel("Add New Process");
@@ -48,28 +50,35 @@ public class InputFrame extends JFrame implements ActionListener {
         quantum.setForeground(Color.black);
         quantum.setFont(new Font("Consolas",Font.PLAIN,15));
 
-        processname=new TextField();
+        processname=new JTextField();
         processname.setBounds(43,205,100,25);
         processname.setBackground(Color.darkGray);
         processname.setForeground(new Color(0x00FF00));
+        processname.setFont(new Font("Arial",Font.CENTER_BASELINE,15));
+        processname.setHorizontalAlignment(JTextField.CENTER);
 
-        arriv=new TextField();
+        arriv=new JTextField();
         arriv.setBounds(180,205,90,25);
         arriv.setBackground(Color.darkGray);
         arriv.setForeground(new Color(0x00FF00));
+        arriv.setFont(new Font("Arial",Font.CENTER_BASELINE,15));
+        arriv.setHorizontalAlignment(JTextField.CENTER);
 
-        burs=new TextField();
+        burs=new JTextField();
         burs.setBounds(295,205,90,25);
         burs.setBackground(Color.darkGray);
         burs.setForeground(new Color(0x00FF00));
+        burs.setFont(new Font("Arial",Font.CENTER_BASELINE,15));
+        burs.setHorizontalAlignment(JTextField.CENTER);
 
-        quant=new TextField();
+        quant=new JTextField();
         quant.setBounds(48,393,90,25);
         quant.setBackground(Color.darkGray);
         quant.setForeground(new Color(0x00FF00));
+        quant.setHorizontalAlignment(JTextField.CENTER);
 
         scroll=new JScrollPane(panel2,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        scroll.setBounds(499,96,195,180);
+        scroll.setBounds(430,96,290,180);
 
         add_process=new JButton("Add Process");
         add_process.setBounds(162,241,115,40);
@@ -77,7 +86,7 @@ public class InputFrame extends JFrame implements ActionListener {
         add_process.addActionListener(this);
 
         add_quantun=new JButton("Add Quantum");
-        add_quantun.setBounds(168,370,115,40);
+        add_quantun.setBounds(168,380,115,40);
         add_quantun.setBackground(Color.cyan);
         add_quantun.addActionListener(this);
 
@@ -137,8 +146,7 @@ public class InputFrame extends JFrame implements ActionListener {
                     int x=Integer.parseInt(arriv.getText());
                     int y=Integer.parseInt(burs.getText());
                     if(x>=0&&y>=0){
-                        String str="process is : "+processname.getText()+" ArrivalTime : "+arriv.getText()+" BurstTime : "+burs.getText();
-                        PROCESS.add(str);
+                        PROCESS.add(new Process(processname.getText(),x,y));
                         processname.setText("");
                         arriv.setText("");
                         burs.setText("");
@@ -197,8 +205,73 @@ public class InputFrame extends JFrame implements ActionListener {
             ReportFrame report=new ReportFrame();
         }
     }
-    private void panelscroll(){
-        panel2.add(new JLabel(PROCESS.get(PROCESS.size()-1)));
+    private void panelscroll() {
+        Border border = BorderFactory.createLineBorder(Color.white);
+        JPanel headPanal = new JPanel() , processPanal;
+        headPanal.setBackground(Color.black);
+        headPanal.setLayout(new BoxLayout(headPanal, BoxLayout.X_AXIS));
+        JComponent component;
+
+        panel2.removeAll();
+
+        panel2.add((JComponent) Box.createVerticalStrut(1));
+
+        for(int i = 0; i < 3; i++)
+        {
+            label = new JLabel();
+
+            if(i == 0)  label.setText(" Process Name ");
+            else if (i == 1)    label.setText(" Arrival Time ");
+            else    label.setText(" Burst Time ");
+
+            label.setForeground(Color.pink);
+
+            headPanal.add(label);
+
+            component = (JComponent) Box.createVerticalStrut(1);
+
+            headPanal.add(component);
+
+
+        }
+
+        headPanal.setBorder(border);
+        headPanal.setBounds(new Rectangle(headPanal.getWidth(),10));
+
+        panel2.add(headPanal);
+        panel2.add((JComponent) Box.createVerticalStrut(5));
+
+        for (Process pro :PROCESS) {
+            processPanal = new JPanel();
+            processPanal.setBackground(Color.gray);
+            processPanal.setLayout(new BoxLayout(processPanal, BoxLayout.X_AXIS));
+
+
+//            processPanal.add(Box.createVerticalStrut(1));
+
+            label =  new JLabel("               " + pro.getProcessName(),SwingConstants.CENTER);
+
+            label.setForeground(Color.green);
+            processPanal.add(label);
+
+            processPanal.add(Box.createVerticalStrut(40));
+
+            label =   new JLabel("          " + pro.getArrivalTime(),SwingConstants.CENTER);
+
+            label.setForeground(Color.green);
+            processPanal.add(label);
+
+            processPanal.add(Box.createVerticalStrut(40));
+
+            label = new JLabel("            " + pro.getBurstTime(),SwingConstants.CENTER);
+
+            label.setForeground(Color.green);
+            processPanal.add(label);
+
+            processPanal.add(Box.createVerticalStrut(30));
+            processPanal.setBorder(border);
+            panel2.add(processPanal);
+        }
         scroll.setViewportView(panel2);
         panel2.revalidate();
         panel2.repaint();

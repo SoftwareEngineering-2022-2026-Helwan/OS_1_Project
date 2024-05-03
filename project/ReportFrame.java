@@ -11,6 +11,7 @@ public class ReportFrame extends JFrame implements ActionListener {
     public JPanel panel2,panel;
     public JScrollPane scroll;
     public ArrayList<String> PROCESS=new ArrayList<String>();
+    CPU cpu=new CPU();
 
     public  JButton close;
     ReportFrame(){
@@ -76,7 +77,11 @@ public class ReportFrame extends JFrame implements ActionListener {
         totalresponse.setForeground(Color.black);
         totalresponse.setFont(new Font("Consolas",Font.BOLD,15));
 
-        t1=new JLabel("99");
+        cpu.setTotalAverageWaitingTime(9.5);
+        cpu.setTotalAverageResponseTime(11.9);
+        cpu.setTotalAverageTurnAroundTime(99.6);
+
+        t1=new JLabel(String.valueOf(cpu.getTotalAverageWaitingTime()));
         t1.setBounds(48,330,60,30);
         t1.setForeground(Color.green);
         t1.setFont(new Font("Consolas",Font.PLAIN,15));
@@ -84,7 +89,7 @@ public class ReportFrame extends JFrame implements ActionListener {
         t1.setBackground(Color.DARK_GRAY);
         t1.setOpaque(true);
 
-        t2=new JLabel("953");
+        t2=new JLabel(String.valueOf(cpu.getTotalAverageTurnAroundTime()));
         t2.setBounds(222,330,60,30);
         t2.setForeground(Color.green);
         t2.setFont(new Font("Consolas",Font.PLAIN,15));
@@ -92,7 +97,7 @@ public class ReportFrame extends JFrame implements ActionListener {
         t2.setBackground(Color.DARK_GRAY);
         t2.setOpaque(true);
 
-        t3=new JLabel("753");
+        t3=new JLabel(String.valueOf(cpu.getTotalAverageResponseTime()));
         t3.setBounds(420,330,60,30);
         t3.setForeground(Color.green);
         t3.setFont(new Font("Consolas",Font.PLAIN,15));

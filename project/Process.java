@@ -118,19 +118,21 @@ public class Process implements Comparable{
 
     @Override
     public int compareTo(Object o) {
-        if(o instanceof Process){
-            if(this.arrivalTime > ((Process)o).getArrivalTime())
-                return this.arrivalTime;
-            else
-                return ((Process)o).getArrivalTime();
-        }
-        else
-        return -1;
+        //not working ??
+//        if(o instanceof Process){
+//            if(this.arrivalTime > ((Process)o).getArrivalTime())
+//                return 1;
+//            else
+//                return 0;
+//        }
+//        return -1;
+
+        return Integer.compare(this.arrivalTime, ((Process)o).getArrivalTime());
     }
 
     @Override
     public String toString() {
-        return "Process{" +
+        return "\nProcess{" +
                 "processName='" + processName + '\'' +
                 ", arrivalTime=" + arrivalTime +
                 ", burstTime=" + burstTime +
