@@ -223,6 +223,13 @@ public class InputFrame extends JFrame implements ActionListener {
         Quant = -1;
         Process.NumberOfProcess = 0;
         TimeInterpretur.consumedQuantum = 0;
+
+        //reset the scroll panel
+        panel2.removeAll();
+        scroll.setViewportView(panel2);
+        panel2.revalidate();
+        panel2.repaint();
+
     }
     private void panelscroll() {
         Border border = BorderFactory.createLineBorder(Color.white);

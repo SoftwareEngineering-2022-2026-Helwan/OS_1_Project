@@ -300,6 +300,7 @@ public class CPU
             if(clock >= currentProcess.getArrivalTime())
             {
                 readyQueue.add(currentProcess);
+                remainingProcess++;
             }
             else
             {

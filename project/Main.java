@@ -9,7 +9,7 @@ public class Main
     {
         if(true)
         {
-            Debug.startDebug(8);
+            Debug.startDebug(1);
         }
     }
 }
