@@ -323,7 +323,23 @@ public class CPU
 
     private void processHandler(Process process)
     {
-        //task4
+        timeInterpretur.processHandler(process);
+        if(process.getStatus()== 1){
+            activeProcessHandler(process);
+        }
+        else {
+            waitingProcessHandler(process);
+        }
+        if( timeInterpretur.getTimeQuantum()== 0 && process.getWasActive() == 1 ){
+            updateProcessTable(process);
+        }
+        if(process.isFinished()){
+            process.setFinalTurnAroundTime(clock - process.getArrivalTime());
+            waitingQueue.add(process);
+        }
+        else {
+            finishedQueue.add(process);
+        }
     }
 
 
