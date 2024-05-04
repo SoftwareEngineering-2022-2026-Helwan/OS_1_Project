@@ -41,7 +41,7 @@ public class TimeInterpretur
         int remainingProcess = cpu.getRemainingProcess();
         int burstTime = process.getBurstTime();
 
-        if (currentIndex == nextIndex) {
+        if (currentIndex == 0) {
             process.setStatus(1);
             cpu.setCurrentIndex(-1);
         }
@@ -53,7 +53,10 @@ public class TimeInterpretur
 
             if (burstTime != 0)
             {
-                cpu.setNextIndex((nextIndex + 1) % remainingProcess);
+                if(remainingProcess != 0)
+                {
+                    cpu.setNextIndex( (cpu.getNextIndex() + 1) % remainingProcess );
+                }
                 
             }
             else

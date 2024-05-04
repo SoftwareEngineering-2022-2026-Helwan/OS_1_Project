@@ -1,8 +1,11 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
 
 public class ReportFrame extends JFrame implements ActionListener {
@@ -13,13 +16,28 @@ public class ReportFrame extends JFrame implements ActionListener {
     CPU cpu;
 
     public  JButton close,gantt;
+
+    private BufferedImage backgroundImage;
     ReportFrame(CPU cpu){
 
         this.cpu = cpu;
         Border border=BorderFactory.createLineBorder(Color.black,3);
 
 
-        panel=new JPanel();
+        try {
+            backgroundImage = ImageIO.read(new File("bgImage.jpeg"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        panel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+
         panel.setBounds(0,0,720,496);
         panel.setLayout(null);
 
@@ -73,37 +91,37 @@ public class ReportFrame extends JFrame implements ActionListener {
 
         process=new JLabel("Process Name");
         process.setBounds(42,75,200,50);
-        process.setForeground(Color.black);
+        process.setForeground(Color.white);
         process.setFont(new Font("Consolas",Font.BOLD,15));
 
         waiting=new JLabel("Waiting Time");
         waiting.setBounds(162,75,200,50);
-        waiting.setForeground(Color.black);
+        waiting.setForeground(Color.white);
         waiting.setFont(new Font("Consolas",Font.BOLD,15));
 
         turn=new JLabel("TurnAround Time");
         turn.setBounds(282,75,200,50);
-        turn.setForeground(Color.black);
+        turn.setForeground(Color.white);
         turn.setFont(new Font("Consolas",Font.BOLD,15));
 
         response=new JLabel("Response Time");
         response.setBounds(430,75,200,50);
-        response.setForeground(Color.black);
+        response.setForeground(Color.white);
         response.setFont(new Font("Consolas",Font.BOLD,15));
 
         totalwait=new JLabel("Total Waiting Time");
         totalwait.setBounds(48,290,200,50);
-        totalwait.setForeground(Color.black);
+        totalwait.setForeground(Color.white);
         totalwait.setFont(new Font("Consolas",Font.BOLD,15));
 
         totalturn=new JLabel("Total TurnAround Time");
         totalturn.setBounds(222,290,200,50);
-        totalturn.setForeground(Color.black);
+        totalturn.setForeground(Color.white);
         totalturn.setFont(new Font("Consolas",Font.BOLD,15));
 
         totalresponse=new JLabel("Total Response Time");
         totalresponse.setBounds(420,290,200,50);
-        totalresponse.setForeground(Color.black);
+        totalresponse.setForeground(Color.white);
         totalresponse.setFont(new Font("Consolas",Font.BOLD,15));
 
         //fill the total average time here
@@ -175,6 +193,7 @@ public class ReportFrame extends JFrame implements ActionListener {
 
         if(e.getSource()==close)
         {
+            this.setVisible(false);
             this.dispose();
         }
         if(e.getSource()==gantt)
@@ -185,4 +204,6 @@ public class ReportFrame extends JFrame implements ActionListener {
         }
 
     }
+
+
 }

@@ -7,10 +7,14 @@ public class Main
 {
     public static void main(String[] args) 
     {
-        if(true)
+        if(false)
         {
-            Debug.startDebug(1);
+            Debug.startDebug(4);
         }
+
+        InputFrame inputFrame = new InputFrame();
+        inputFrame.setBounds(new Rectangle(800,550));
+        inputFrame.setLocationRelativeTo(null);
     }
 }
 
@@ -46,6 +50,10 @@ class Debug
                 break;
             case 2:
                 task2();
+                break;
+            case 4:
+                task4();
+                break;
         }
     }
 
@@ -304,6 +312,31 @@ class Debug
 
         cpu.buildReport();
 
+        System.out.println(cpu.toString());
+
+    }
+
+    static void task4()
+    {
+        Process p1 = new Process("p1",0,4);
+        Process p2 = new Process("p2",0,2);
+        Process p3 = new Process("p3",0,2);
+        Process p4 = new Process("p4",0,2);
+        Process p5 = new Process("p5",0,3);
+
+
+        ArrayList<Process> pl = new ArrayList<>();
+        pl.add(p1);
+        pl.add(p2);
+        pl.add(p3);
+//        pl.add(p4);
+//        pl.add(p5);
+
+        CPU cpu = new CPU(pl,2);
+
+        cpu.startProcess();
+
+        GanttChart g = new GanttChart(cpu);
         System.out.println(cpu.toString());
 
     }

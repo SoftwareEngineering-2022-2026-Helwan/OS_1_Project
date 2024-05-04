@@ -1,8 +1,11 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
 
 public class InputFrame extends JFrame implements ActionListener {
@@ -14,40 +17,59 @@ public class InputFrame extends JFrame implements ActionListener {
     public JButton add_process,add_quantun,clear,submit;
     public JPanel panel2,panel;
     public JScrollPane scroll;
+
+    ReportFrame report;
+    private BufferedImage backgroundImage;
+
     InputFrame(){
 
-        panel=new JPanel();
-        panel.setBounds(0,0,720,496);
+
+        try {
+            backgroundImage = ImageIO.read(new File("bgImage.jpeg"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        panel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+
+        panel.setBounds(0,0,800,550);
         panel.setLayout(null);
 
         panel2=new JPanel();
         panel2.setBounds(499,96,195,180);
-        panel2.setBackground(Color.darkGray);
+        panel2.setBackground(Color.gray);
         panel2.setLayout(new BoxLayout(panel2, BoxLayout.Y_AXIS));
 
+
         addprocess=new JLabel("Add New Process");
-        addprocess.setBounds(184,120,200,50);
-        addprocess.setForeground(Color.black);
-        addprocess.setFont(new Font("Consolas",Font.PLAIN,15));
+        addprocess.setBounds(100,120,290,50);
+        addprocess.setForeground(Color.WHITE);
+        addprocess.setFont(new Font("Consolas",Font.BOLD,30));
 
         nameprocess=new JLabel("Process Name");
         nameprocess.setBounds(45,160,200,50);
-        nameprocess.setForeground(Color.black);
+        nameprocess.setForeground(Color.white);
         nameprocess.setFont(new Font("Consolas",Font.PLAIN,15));
 
         arrival=new JLabel("Arrival Time");
         arrival.setBounds(179,160,200,50);
-        arrival.setForeground(Color.black);
+        arrival.setForeground(Color.white);
         arrival.setFont(new Font("Consolas",Font.PLAIN,15));
 
         burst=new JLabel("Burst Time");
         burst.setBounds(294,160,200,50);
-        burst.setForeground(Color.black);
+        burst.setForeground(Color.white);
         burst.setFont(new Font("Consolas",Font.PLAIN,15));
 
         quantum=new JLabel("Quantum Time");
         quantum.setBounds(47,341,200,50);
-        quantum.setForeground(Color.black);
+        quantum.setForeground(Color.white);
         quantum.setFont(new Font("Consolas",Font.PLAIN,15));
 
         processname=new JTextField();
@@ -154,13 +176,13 @@ public class InputFrame extends JFrame implements ActionListener {
                         panelscroll();
                     }
                     else {
-                        JOptionPane.showMessageDialog(null,"error in  inputs","error",JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null,"Arrival , Burst Time \nMust be Greater than or Equal 0 ","error",JOptionPane.ERROR_MESSAGE);
 
                     }
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(null,"error in  inputs","error",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null,"Arrival , Burst Time \nMust be  Number","error",JOptionPane.ERROR_MESSAGE);
 
                 }
             }
@@ -182,12 +204,14 @@ public class InputFrame extends JFrame implements ActionListener {
 
                     }
                     else {
-                        JOptionPane.showMessageDialog(null,"enter inputs","error",JOptionPane.ERROR_MESSAGE);
+                        quant.setText("");
+                        JOptionPane.showMessageDialog(null,"Invalid Quantum\nPositive Only","error",JOptionPane.ERROR_MESSAGE);
 
                     }
                 }
                 else {
-                    JOptionPane.showMessageDialog(null,"enter inputs","error",JOptionPane.ERROR_MESSAGE);
+                    quant.setText("");
+                    JOptionPane.showMessageDialog(null,"Numeric Values only","error",JOptionPane.ERROR_MESSAGE);
 
                 }
             }}catch (Exception v)
@@ -203,16 +227,27 @@ public class InputFrame extends JFrame implements ActionListener {
         }
         if (e.getSource()==submit)
         {
+            if(PROCESS.isEmpty())
+            {
+                JOptionPane.showMessageDialog(null,"Missing Process List","error",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if(Quant <= 0)
+            {
+                JOptionPane.showMessageDialog(null,"Missing time Quantum","error",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             //put cpu in constructor
             cpu = new CPU(PROCESS,Quant);
 
             cpu.startProcess();
 
-            ReportFrame report=new ReportFrame(cpu);
+            report=new ReportFrame(cpu);
             report.setLocationRelativeTo(null);
 
             //empty the program for new run
-            setDefaultValues();
+
+
 
         }
     }
@@ -269,7 +304,7 @@ public class InputFrame extends JFrame implements ActionListener {
 
         for (Process pro :PROCESS) {
             processPanal = new JPanel();
-            processPanal.setBackground(Color.gray);
+            processPanal.setBackground(Color.DARK_GRAY);
             processPanal.setLayout(new BoxLayout(processPanal, BoxLayout.X_AXIS));
 
 

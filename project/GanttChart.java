@@ -22,7 +22,7 @@ public class GanttChart extends JFrame{
 
         for (int i = 0; i < pt.size(); i++) {
             level1Series = new TaskSeries(pt.get(i).getProcessName());
-            Task t1 = new Task(pt.get(i).getProcessName(), new SimpleTimePeriod(0,cpu.getMaxClock()));
+            Task t1 = new Task(pt.get(i).getProcessName(), new SimpleTimePeriod(0,cpu.getMaxClock()+3));
             t1.addSubtask(new Task(pt.get(i).getProcessName(), new SimpleTimePeriod(pt.get(i).getStartTime(), pt.get(i).getEndTime())));
 
             while (i < pt.size() - 1 && pt.get(i).getProcessName().equals(pt.get(i + 1).getProcessName())) {

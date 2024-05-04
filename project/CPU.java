@@ -212,24 +212,59 @@ public class CPU
 
     public int getWasActiveProcess()
     {
+        //if process was active and one arrival
         int ret = 0;
         if(!readyQueue.isEmpty())
         {
-            Queue<Process> q2 = new LinkedList<>();
-            Process p;
+            LinkedList<Process> q2 = new LinkedList<>();
+            Process p, wP = null;
+            int i;
             
-            for(int i = 0; i < readyQueue.size();i++){
+            for(i= 0;  !readyQueue.isEmpty();i++){
                 p = readyQueue.remove();
                 if(p.getWasActive() == 1){
                     ret = 1;
-                    p.setWasActive(0);   
+                    p.setWasActive(0);
+                    wP = p;
+                    if(readyQueue.isEmpty())
+                    {
+                        q2.add(wP);
+                    }
+                        continue;
+                }
+
+                q2.add(p);
+
+                if(p.getArrivalTime() == clock && wP != null)
+                {
+                    q2.add(wP);
+                    wP = null;
+                }
+
+
+
+            }
+
+            readyQueue.addAll(q2);
+            q2.clear();
+        }
+
+        if(!waitingQueue.isEmpty())
+        {
+            LinkedList<Process> q2 = new LinkedList<>();
+            Process p;
+
+            for(int i = 0;  !waitingQueue.isEmpty();i++){
+                p = waitingQueue.remove();
+                if(p.getWasActive() == 1){
+                    ret = 1;
+                    p.setWasActive(0);
                 }
                 q2.add(p);
             }
-            readyQueue.addAll(q2);
+            waitingQueue.addAll(q2);
+            q2.clear();
         }
-        else 
-            return -1;
 
         return ret;
     }
@@ -249,23 +284,32 @@ public class CPU
         do
         {
             //fill ready queue
+
             updateReadyQueue();
-
-            if(!readyQueue.isEmpty())
-            {
-                handleReadyQueue();
-            }
-
-            if(!finishedQueue.isEmpty())
-            {
-                readyQueue.addAll(finishedQueue);
-            }
 
             //reset the was active variable
             if(getWasActiveProcess() == 1)
             {
                 setCurrentIndex(0);
             }
+
+            do
+            {
+                if(!readyQueue.isEmpty())
+                {
+                    handleReadyQueue();
+                }
+
+            }while (!readyQueue.isEmpty());
+
+
+            if(!finishedQueue.isEmpty())
+            {
+                readyQueue.addAll(finishedQueue);
+                finishedQueue.clear();
+            }
+
+
 
             clock++;
         }while (maxClock > clock);
@@ -293,31 +337,35 @@ public class CPU
 
     private void updateReadyQueue()
     {
-        if(!arrivalQueue.isEmpty())
+
+        while (!arrivalQueue.isEmpty())
         {
             currentProcess = arrivalQueue.remove(0);
 
-            if(clock >= currentProcess.getArrivalTime())
-            {
+            if (clock >= currentProcess.getArrivalTime()) {
                 readyQueue.add(currentProcess);
                 remainingProcess++;
-            }
-            else
-            {
+            } else {
                 arrivalQueue.add(0, currentProcess);
+                break;
             }
-
         }
     }
 
     private void handleReadyQueue()
     {
         currentProcess = readyQueue.remove();
-        processHandler(currentProcess);
+        if(currentProcess != null)
+        {
+            processHandler(currentProcess);
+        }
 
         if(getCurrentIndex() != -1)
         {
-            setCurrentIndex( (getCurrentIndex() + 1) % remainingProcess );
+            if(remainingProcess != 0)
+            {
+                setCurrentIndex( (getCurrentIndex() + 1) % remainingProcess );
+            }
         }
     }
 
@@ -330,11 +378,34 @@ public class CPU
         else {
             waitingProcessHandler(process);
         }
-        if( timeInterpretur.getTimeQuantum()== 0 && process.getWasActive() == 1 ){
+
+        if( TimeInterpretur.consumedQuantum == 0 && process.getWasActive() == 1 ){
             updateProcessTable(process);
+
+            if(process.getBurstTime() != 0)
+            {
+                if(readyQueue.isEmpty())
+                {
+                    finishedQueue.add(process);
+                    return;
+                }
+                readyQueue.add(process);
+                return;
+            }
         }
+
         if(process.isFinished()){
-            process.setFinalTurnAroundTime(clock - process.getArrivalTime());
+            if(TimeInterpretur.consumedQuantum < timeInterpretur.getTimeQuantum())
+            {
+                process.setFinalTurnAroundTime(clock - process.getArrivalTime() + 1);
+                updateProcessTable(process);
+                TimeInterpretur.consumedQuantum = timeInterpretur.getTimeQuantum();
+                timeInterpretur.processHandler(process);
+            }
+            else
+            {
+                process.setFinalTurnAroundTime(clock - process.getArrivalTime());
+            }
             waitingQueue.add(process);
         }
         else {
@@ -367,7 +438,11 @@ public class CPU
 
     private void updateProcessTable(Process process)
     {
-        setCurrentProcessEndTime(clock);
+        if(getCurrentProcessStartTime() == -1)
+        {
+            return;
+        }
+        setCurrentProcessEndTime(clock+1);
         processTableList.add
         (
             new ProcessTable
