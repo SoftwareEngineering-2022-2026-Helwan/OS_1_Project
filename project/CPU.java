@@ -243,8 +243,81 @@ public class CPU
 
     public void startProcess()
     {
-        //task5
+        //reset variable to default
+        setDefaultValues();
 
+        do
+        {
+            //fill ready queue
+            updateReadyQueue();
+
+            if(!readyQueue.isEmpty())
+            {
+                handleReadyQueue();
+            }
+
+            if(!finishedQueue.isEmpty())
+            {
+                readyQueue.addAll(finishedQueue);
+            }
+
+            //reset the was active variable
+            if(getWasActiveProcess() == 1)
+            {
+                setCurrentIndex(0);
+            }
+
+            clock++;
+        }while (maxClock > clock);
+
+        buildReport();
+
+    }
+
+    private void setDefaultValues()
+    {
+        currentProcess = null;
+
+        nextIndex = 0;
+        currentIndex = 0;
+
+        totalAverageWaitingTime = 0.0;
+        totalAverageTurnAroundTime = 0.0;
+        totalAverageResponseTime = 0.0;
+
+        currentProcessStartTime = -1;
+        currentProcessEndTime = -1;
+
+        clock = 0;
+    }
+
+    private void updateReadyQueue()
+    {
+        if(!arrivalQueue.isEmpty())
+        {
+            currentProcess = arrivalQueue.remove(0);
+
+            if(clock >= currentProcess.getArrivalTime())
+            {
+                readyQueue.add(currentProcess);
+            }
+            else
+            {
+                arrivalQueue.add(0, currentProcess);
+            }
+
+        }
+    }
+
+    private void handleReadyQueue()
+    {
+        currentProcess = readyQueue.remove();
+        processHandler(currentProcess);
+
+        if(getCurrentIndex() != -1)
+        {
+            setCurrentIndex( (getCurrentIndex() + 1) % remainingProcess );
+        }
     }
 
     private void processHandler(Process process)

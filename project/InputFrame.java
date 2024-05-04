@@ -205,9 +205,24 @@ public class InputFrame extends JFrame implements ActionListener {
         {
             //put cpu in constructor
             cpu = new CPU(PROCESS,Quant);
+
+            cpu.startProcess();
+
             ReportFrame report=new ReportFrame(cpu);
             report.setLocationRelativeTo(null);
+
+            //empty the program for new run
+            setDefaultValues();
+
         }
+    }
+
+    private void setDefaultValues()
+    {
+        PROCESS.clear();
+        Quant = -1;
+        Process.NumberOfProcess = 0;
+        TimeInterpretur.consumedQuantum = 0;
     }
     private void panelscroll() {
         Border border = BorderFactory.createLineBorder(Color.white);
