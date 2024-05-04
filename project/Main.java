@@ -7,9 +7,10 @@ public class Main
 {
     public static void main(String[] args) 
     {
-        if(false)
+        if(true)
         {
             Debug.startDebug(4);
+            return;
         }
 
         InputFrame inputFrame = new InputFrame();
@@ -52,7 +53,9 @@ class Debug
                 task2();
                 break;
             case 4:
-                task4();
+//                task4();
+                task4_b();
+//                task4_c();
                 break;
         }
     }
@@ -318,25 +321,69 @@ class Debug
 
     static void task4()
     {
-        Process p1 = new Process("p1",0,4);
-        Process p2 = new Process("p2",0,2);
-        Process p3 = new Process("p3",0,2);
-        Process p4 = new Process("p4",0,2);
-        Process p5 = new Process("p5",0,3);
+        Process p1 = new Process("p1",0,5);
+        Process p2 = new Process("p2",1,3);
+        Process p3 = new Process("p3",2,1);
+        Process p4 = new Process("p4",3,2);
+        Process p5 = new Process("p5",4,3);
 
 
         ArrayList<Process> pl = new ArrayList<>();
         pl.add(p1);
         pl.add(p2);
         pl.add(p3);
-//        pl.add(p4);
-//        pl.add(p5);
+        pl.add(p4);
+        pl.add(p5);
 
         CPU cpu = new CPU(pl,2);
 
         cpu.startProcess();
 
-        GanttChart g = new GanttChart(cpu);
+        ReportFrame g = new ReportFrame(cpu);
+        System.out.println(cpu.toString());
+
+    }
+
+    static void task4_b()
+    {
+        Process p1 = new Process("p1",0,24);
+        Process p2 = new Process("p2",2,3);
+        Process p3 = new Process("p3",4,3);
+
+        ArrayList<Process> pl = new ArrayList<>();
+        pl.add(p1);
+        pl.add(p2);
+        pl.add(p3);
+
+        CPU cpu = new CPU(pl,4);
+
+        cpu.startProcess();
+
+        ReportFrame g = new ReportFrame(cpu);
+        System.out.println(cpu.toString());
+
+    }
+
+    static void task4_c()
+    {
+        Process p1 = new Process("p1",0,12);
+        Process p2 = new Process("p2",0,8);
+        Process p3 = new Process("p3",0,4);
+        Process p4 = new Process("p4",0,10);
+        Process p5 = new Process("p5",0,5);
+
+        ArrayList<Process> pl = new ArrayList<>();
+        pl.add(p1);
+        pl.add(p2);
+        pl.add(p3);
+        pl.add(p4);
+        pl.add(p5);
+
+        CPU cpu = new CPU(pl,5);
+
+        cpu.startProcess();
+
+        ReportFrame g = new ReportFrame(cpu);
         System.out.println(cpu.toString());
 
     }

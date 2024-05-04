@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class ReportFrame extends JFrame implements ActionListener {
     public JLabel process,waiting,turn,response,totalwait,totalturn,totalresponse,t1,t2,t3,label;
 
+    GanttChart chart;
     public JPanel panel2,panel;
     public JScrollPane scroll;
     CPU cpu;
@@ -194,12 +195,19 @@ public class ReportFrame extends JFrame implements ActionListener {
         if(e.getSource()==close)
         {
             this.setVisible(false);
+            if(chart.isVisible())
+            {
+                chart.dispose();
+            }
+            //empty the program for new run
+            InputFrame.setDefaultValues();
             this.dispose();
         }
         if(e.getSource()==gantt)
         {
-            GanttChart chart = new GanttChart(cpu);
+            chart = new GanttChart(cpu);
             chart.setTitle("Gantt Chart");
+            chart.setVisible(true);
             chart.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         }
 

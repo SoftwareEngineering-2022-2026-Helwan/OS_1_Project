@@ -67,6 +67,7 @@ public class ProcessTable
                 {
                     list.add(p2);
                     processTableList.remove(j);
+                    j--;
                 }
             }
             processTableList.remove(p1);

@@ -9,14 +9,14 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class InputFrame extends JFrame implements ActionListener {
-    public int Quant;
+    private static int Quant;
     CPU cpu;
-    public ArrayList<Process> PROCESS=new ArrayList<Process>();
+    private static ArrayList<Process> PROCESS=new ArrayList<Process>();
     public JLabel addprocess,nameprocess,arrival,burst,quantum,label;
     public JTextField processname,arriv,burs,quant;
     public JButton add_process,add_quantun,clear,submit;
-    public JPanel panel2,panel;
-    public JScrollPane scroll;
+    private static JPanel panel2,panel;
+    private static JScrollPane scroll;
 
     ReportFrame report;
     private BufferedImage backgroundImage;
@@ -97,6 +97,7 @@ public class InputFrame extends JFrame implements ActionListener {
         quant.setBounds(48,393,90,25);
         quant.setBackground(Color.darkGray);
         quant.setForeground(new Color(0x00FF00));
+        quant.setFont(new Font("Arial",Font.CENTER_BASELINE,15));
         quant.setHorizontalAlignment(JTextField.CENTER);
 
         scroll=new JScrollPane(panel2,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -167,7 +168,7 @@ public class InputFrame extends JFrame implements ActionListener {
                 if(IsInteger(arriv.getText())&&IsInteger(burs.getText())){
                     int x=Integer.parseInt(arriv.getText());
                     int y=Integer.parseInt(burs.getText());
-                    if(x>=0&&y>=0){
+                    if(x>=0&&y>0){
                         PROCESS.add(new Process(processname.getText(),x,y));
                         processname.setText("");
                         arriv.setText("");
@@ -175,8 +176,13 @@ public class InputFrame extends JFrame implements ActionListener {
                         panel2.setVisible(true);
                         panelscroll();
                     }
-                    else {
-                        JOptionPane.showMessageDialog(null,"Arrival , Burst Time \nMust be Greater than or Equal 0 ","error",JOptionPane.ERROR_MESSAGE);
+                    else if (y <= 0 )
+                    {
+                        JOptionPane.showMessageDialog(null,"Burst Time \nMust be Greater than  0 ","error",JOptionPane.ERROR_MESSAGE);
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null,"Arrival Time \nMust be Greater than or Equal 0 ","error",JOptionPane.ERROR_MESSAGE);
 
                     }
                 }
@@ -245,14 +251,14 @@ public class InputFrame extends JFrame implements ActionListener {
             report=new ReportFrame(cpu);
             report.setLocationRelativeTo(null);
 
-            //empty the program for new run
+
 
 
 
         }
     }
 
-    private void setDefaultValues()
+    public static  void setDefaultValues()
     {
         PROCESS.clear();
         Quant = -1;

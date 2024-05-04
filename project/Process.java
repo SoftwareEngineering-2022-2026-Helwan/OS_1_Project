@@ -117,7 +117,7 @@ public class Process implements Comparable{
     }
 
     @Override
-    public int compareTo(Object o)
+    public  int compareTo(Object o)
     {
         return Integer.compare(this.arrivalTime, ((Process)o).getArrivalTime());
     }

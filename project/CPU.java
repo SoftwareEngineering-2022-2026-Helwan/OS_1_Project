@@ -312,7 +312,7 @@ public class CPU
 
 
             clock++;
-        }while (maxClock > clock);
+        }while (maxClock >= clock);
 
         buildReport();
 
@@ -397,15 +397,12 @@ public class CPU
         if(process.isFinished()){
             if(TimeInterpretur.consumedQuantum < timeInterpretur.getTimeQuantum())
             {
-                process.setFinalTurnAroundTime(clock - process.getArrivalTime() + 1);
                 updateProcessTable(process);
                 TimeInterpretur.consumedQuantum = timeInterpretur.getTimeQuantum();
                 timeInterpretur.processHandler(process);
             }
-            else
-            {
-                process.setFinalTurnAroundTime(clock - process.getArrivalTime());
-            }
+
+            process.setFinalTurnAroundTime(clock - process.getArrivalTime()+ 1);
             waitingQueue.add(process);
         }
         else {
@@ -442,6 +439,7 @@ public class CPU
         {
             return;
         }
+
         setCurrentProcessEndTime(clock+1);
         processTableList.add
         (
@@ -466,6 +464,11 @@ public class CPU
         setTotalAverageTurnAroundTime(calculateAverageTurnAroundTime());
 
         processTableList = ProcessTable.sortProcessTable(processTableList);
+        LinkedList<Process> waitingList = (LinkedList<Process>) waitingQueue;
+        waitingList.sort(Process::compareTo);
+
+        waitingQueue = waitingList;
+
     }
 
     public double calculateAverageWaitingTime()
@@ -536,7 +539,6 @@ public class CPU
                 ", \nTotalAverageResponseTime= " + totalAverageResponseTime +
                 ", \nTotalAverageTurnAroundTime= " + totalAverageTurnAroundTime +
                 ", \nTotalAverageWaitingTime= " + totalAverageWaitingTime +
-                ", \nprocessTableList= " + processTableList +
                 "\n}";
     }
 }
