@@ -70,10 +70,9 @@ int main(int argc, String argv[])
 					printf("\n[~] Stoping : %s\n",processName);
 
 					stopProcess(&command, processName);
-					
+					free(processName); 
 				}
 				
-				free(processName); 
 
 				break;
 			case 5:
@@ -99,7 +98,15 @@ int main(int argc, String argv[])
 
 		if(option != 0)
 		{
+
+			if(start == 1)
+			{
+				sprintf(command,"%s ;%s%s%s",command,IS_PROCESS_UP_PART1,processName,IS_PROCESS_UP_PART2);	
+				free(processName);
+			}
+
 			system(command);
+
 			free(command);
 		}
 		

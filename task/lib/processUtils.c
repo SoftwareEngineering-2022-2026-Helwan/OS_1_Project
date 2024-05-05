@@ -33,15 +33,13 @@ void displayAllProcessId(String *command)
 
 void startProcess(String *command, String serviceName)
 {
-	strcpy(*command , serviceName);
-    strcat(*command , " &");
+	sprintf(*command,"%s%s%s",START_BACKGROUND_PROCESS_PART1,serviceName,START_BACKGROUND_PROCESS_PART2);
 }
 
 void stopProcess(String *command, String processName)
 {
-    strcpy(*command ,PKILL);
-    strcat(*command ,SIG_KILL);
-    strcat(*command , processName);
+
+	sprintf(*command, "(%s%s\"%s\") &>/dev/null",PKILL,SIG_KILL,processName);
 
 }
 
