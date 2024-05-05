@@ -47,7 +47,7 @@ void stopProcess(String *command, String processName)
 
 void sendSignal(String signal, String *command, String processName)
 {
-	sprintf(*command, "%s%s \"%s\"",PKILL,signal,processName); 
+	sprintf(*command, "(%s%s\"%s\") &>/dev/null",PKILL,signal,processName); 
 	
 }
 
