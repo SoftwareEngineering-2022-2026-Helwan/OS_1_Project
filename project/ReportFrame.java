@@ -110,17 +110,17 @@ public class ReportFrame extends JFrame implements ActionListener {
         response.setForeground(Color.white);
         response.setFont(new Font("Consolas",Font.BOLD,15));
 
-        totalwait=new JLabel("Total Waiting Time");
+        totalwait=new JLabel("Average Waiting Time");
         totalwait.setBounds(48,290,200,50);
         totalwait.setForeground(Color.white);
         totalwait.setFont(new Font("Consolas",Font.BOLD,15));
 
-        totalturn=new JLabel("Total TurnAround Time");
+        totalturn=new JLabel("Average TurnAround Time");
         totalturn.setBounds(222,290,200,50);
         totalturn.setForeground(Color.white);
         totalturn.setFont(new Font("Consolas",Font.BOLD,15));
 
-        totalresponse=new JLabel("Total Response Time");
+        totalresponse=new JLabel("Average Response Time");
         totalresponse.setBounds(420,290,200,50);
         totalresponse.setForeground(Color.white);
         totalresponse.setFont(new Font("Consolas",Font.BOLD,15));

@@ -2,11 +2,11 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.ActionEvent;
+import java.awt.event.*;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.util.ArrayList;
+import java.util.*;
 
 public class InputFrame extends JFrame implements ActionListener {
     private static int Quant;
@@ -17,6 +17,9 @@ public class InputFrame extends JFrame implements ActionListener {
     public JButton add_process,add_quantun,clear,submit;
     private static JPanel panel2,panel;
     private static JScrollPane scroll;
+
+    public ArrayList<JCheckBox> checkBox = new ArrayList<>();
+
 
     ReportFrame report;
     private BufferedImage backgroundImage;
@@ -113,8 +116,8 @@ public class InputFrame extends JFrame implements ActionListener {
         add_quantun.setBackground(Color.cyan);
         add_quantun.addActionListener(this);
 
-        clear=new JButton("Clear");
-        clear.setBounds(525,280,115,40);
+        clear=new JButton("Clear Selected");
+        clear.setBounds(525,280,120,40);
         clear.setBackground(Color.cyan);
         clear.addActionListener(this);
 
@@ -225,11 +228,32 @@ public class InputFrame extends JFrame implements ActionListener {
         }
         if (e.getSource()==clear)
         {
-            panel2.removeAll();
-            PROCESS.clear();
-            scroll.setViewportView(panel2);
-            panel2.revalidate();
-            panel2.repaint();
+            JCheckBox selectedCheckBox;
+            Process process;
+            int counter = 0;
+            while ( counter < PROCESS.size() )
+            {
+                selectedCheckBox = checkBox.remove(counter);
+                process = PROCESS.remove(counter);
+
+                if(!selectedCheckBox.isSelected())
+                {
+                        PROCESS.add(counter,process);
+                        checkBox.add(counter,selectedCheckBox);
+
+                    counter++;
+                }
+                else
+                {
+                    if (PROCESS.isEmpty())
+                    {
+                        break;
+                    }
+                    counter = 0;
+                }
+            }
+            panelscroll();
+
         }
         if (e.getSource()==submit)
         {
@@ -308,13 +332,25 @@ public class InputFrame extends JFrame implements ActionListener {
         panel2.add(headPanal);
         panel2.add((JComponent) Box.createVerticalStrut(5));
 
+        JCheckBox processCheckBox;
+        checkBox.clear();
         for (Process pro :PROCESS) {
             processPanal = new JPanel();
             processPanal.setBackground(Color.DARK_GRAY);
             processPanal.setLayout(new BoxLayout(processPanal, BoxLayout.X_AXIS));
 
 
-            label =  new JLabel("               " + pro.getProcessName(),SwingConstants.CENTER);
+            processCheckBox = new JCheckBox();
+            processCheckBox.setText(pro.getProcessName());
+            processCheckBox.setForeground(Color.DARK_GRAY);
+            processCheckBox.setBackground(Color.DARK_GRAY);
+            processCheckBox.setFocusPainted(false);
+            checkBox.add(processCheckBox);
+
+            processPanal.add(processCheckBox);
+
+
+            label =  new JLabel(" " + pro.getProcessName(),SwingConstants.CENTER);
 
             label.setForeground(Color.green);
             processPanal.add(label);
