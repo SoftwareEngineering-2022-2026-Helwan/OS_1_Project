@@ -24,7 +24,7 @@ const String GET_PROCESS_ID =" $( ps -o pid= -C $PROCESS_NAME )";
 
 //start background process
 const String START_BACKGROUND_PROCESS_PART1 = "( ";
-const String START_BACKGROUND_PROCESS_PART2 = " > /dev/null 2>&1 &) ";
+const String START_BACKGROUND_PROCESS_PART2 = " 2> log  &) ";
 
 // validate process start 
 const String IS_PROCESS_UP_PART1 = "if [ \"$(ps -o pid= -C ";

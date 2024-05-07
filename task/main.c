@@ -33,6 +33,7 @@ int main(int argc, String argv[])
 	String command = (String) malloc(5000), userName, processName;
 	do
 	{
+		start = -2;
 		printMainMenu();
 		option = optionValidation(0,5);
 	
@@ -96,7 +97,7 @@ int main(int argc, String argv[])
 			
 		}
 
-		if(option != 0)
+		if(option != 0 && start != -1 )
 		{
 
 			if(start == 1)
