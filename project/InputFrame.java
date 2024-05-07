@@ -239,6 +239,7 @@ public class InputFrame extends JFrame implements ActionListener {
                 if(!selectedCheckBox.isSelected())
                 {
                         PROCESS.add(counter,process);
+                        Process.NumberOfProcess--;
                         checkBox.add(counter,selectedCheckBox);
 
                     counter++;
